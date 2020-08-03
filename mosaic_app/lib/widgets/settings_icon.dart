@@ -4,15 +4,15 @@ import 'package:mosaicapp/constants.dart';
 class SettingsIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return MaterialButton(
       child: Icon(
         Icons.settings,
         size: kIconSize,
         color: Colors.white,
       ),
-      onTap: () {
-        //TODO Uncomment.
-        //Navigator.pushNamed(context, SettingsPage.id)
+      onPressed: () {
+        //TODO Delete debugPrint and implement functionality
+        debugPrint("Setting Button Pressed");
       },
     );
   }

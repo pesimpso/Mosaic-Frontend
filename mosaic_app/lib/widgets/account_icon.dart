@@ -4,14 +4,16 @@ import 'package:mosaicapp/constants.dart';
 class AccountIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return MaterialButton(
       child: Icon(
         Icons.account_circle,
         size: kIconSize,
         color: Colors.white,
       ),
-      //TODO Implement onTap
-      //onTap: (constext, ),
+      onPressed: () {
+        //TODO Remove debugPrint and implement functionality
+        debugPrint("Pressed Account Button");
+      },
     );
   }
 }
