@@ -11,6 +11,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       initialRoute: Homepage.id,
+      //Route String : Function pair
       routes: {
         Homepage.id: (context) => Homepage(),
       },
