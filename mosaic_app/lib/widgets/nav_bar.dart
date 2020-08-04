@@ -26,7 +26,7 @@ class NavBar extends StatelessWidget {
               children: <Widget>[
                 SettingsIcon(),
                 SizedBox(
-                  width: 10,
+                  width: 15,
                 ),
                 AccountIcon(),
                 SizedBox(
