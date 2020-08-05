@@ -12,7 +12,7 @@ class SettingsIcon extends StatelessWidget {
       ),
       minWidth: 40,
       onPressed: () {
-        //TODO Delete debugPrint and implement functionality
+        Navigator.pushNamed(context, '/settings');
         debugPrint("Setting Button Pressed");
       },
     );

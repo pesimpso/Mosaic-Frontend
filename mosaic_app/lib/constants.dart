@@ -20,4 +20,10 @@ const TextStyle kBodyStyle = TextStyle(
   fontFamily: 'Josefin Sans:wght500',
 );
 
+const TextStyle kBodyStyleDark = TextStyle(
+  fontSize: 16,
+  color: Colors.black,
+  fontFamily: 'Josefin Sans:wght500',
+);
+
 const double kIconSize = 40;
