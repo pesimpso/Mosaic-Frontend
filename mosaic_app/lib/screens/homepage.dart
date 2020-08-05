@@ -38,11 +38,11 @@ class _HomepageState extends State<Homepage> {
             ),
             /* BEGIN CATEGORIES BAR */
             Padding(
-              padding: EdgeInsets.only(bottom: 15.0),
+              padding: EdgeInsets.all(0),
               child: Column(children: [
                 Row(
                   children: [
-                    Expanded(child: RestaurantIcon(),),
+                    Expanded(child: RestaurantIcon()),
                     Expanded(child: CafeIcon()),
                     Expanded(child: PizzaIcon()),
                     Expanded(child: BarIcon()),
@@ -53,6 +53,19 @@ class _HomepageState extends State<Homepage> {
             ),
             /* BEGIN SEARCH BAR */
             SearchBar(),
+            /* BEGIN FEATURED RESTAURANTS */
+            Padding(
+              padding: EdgeInsets.only(bottom: 15.0, left: 15.0),
+              child: 
+              Row(
+                children: [
+                Text(
+                  'Minority-Owned\nRestaurants Nearby',
+                  style: kTitleStyle,
+                  ),
+                ],
+              ),
+            ),
             ]),
           ),
       );

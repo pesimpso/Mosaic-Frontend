@@ -22,18 +22,18 @@ class NavBar extends StatelessWidget {
                 ),
               ],
             ),
-            Row(
-              children: <Widget>[
-                SettingsIcon(),
-                SizedBox(
-                  width: 15,
+             Container(
+                child: Row(
+                  children: <Widget>[
+                    Expanded(child: SettingsIcon()),
+                    Expanded(child: AccountIcon()),
+                    SizedBox(
+                      width: 25,
+                    ),
+                  ],
                 ),
-                AccountIcon(),
-                SizedBox(
-                  width: 15,
-                ),
-              ],
-            ),
+                width: 110,
+              ),
           ],
         ),
         Container(

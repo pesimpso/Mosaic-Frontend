@@ -10,6 +10,7 @@ class AccountIcon extends StatelessWidget {
         size: kIconSize,
         color: Colors.white,
       ),
+      minWidth: 40,
       onPressed: () {
         //TODO Remove debugPrint and implement functionality
         debugPrint("Pressed Account Button");
