@@ -7,6 +7,13 @@ const TextStyle kTitleStyle = TextStyle(
   fontWeight: FontWeight.w400,
 );
 
+const TextStyle kHeaderStyle = TextStyle(
+  fontSize: 28,
+  color: Colors.black,
+  fontFamily: 'Josefin Sans:w100',
+  fontWeight: FontWeight.w400,
+);
+
 const TextStyle kBodyStyle = TextStyle(
   fontSize: 16,
   color: Colors.white,

@@ -89,7 +89,6 @@ class _SignUpState extends State<SignUp> {
                           ),
                         color: Colors.lightBlue,
                         clipBehavior: Clip.hardEdge,
-                        textColor: Colors.white,
                         /* NEED TO ADD FUNCTIONALITY */
                         onPressed: () {
                           //TODO Delete debugPrint and implement functionality
