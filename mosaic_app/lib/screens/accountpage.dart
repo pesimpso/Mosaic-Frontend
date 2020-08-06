@@ -93,39 +93,75 @@ class _AccountPageState extends State<AccountPage> {
                       ),
                     ],
                   ),
-                    Divider(
-                      color: Colors.black,
-                      thickness: 1,
-                    ),
-                    /* BEGIN FAVORITES LIST */
-                    Card(
-                      child: InkWell(
-                        onTap: () {
-                          //TODO Delete debugPrint and implement functionality
-                          debugPrint("Restaurant button pressed");
-                        },
-                         child: 
-                          Row(children: <Widget>[
-                            Container(
-                              height: 40,
-                              width: 40,
-                              margin: EdgeInsets.all(5),
-                              child: Image.asset('assets/images/gray_square.png'),
-                            ),
-                            Text(
-                              'Name\n', 
-                              style: kBodyStyle,   
-                              textAlign: TextAlign.left,                   
-                            ),
-                          ],),
-                      ),
-                      color: Colors.black,
-                      margin: EdgeInsets.only(bottom: 10, left: 30, right: 30),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(5),
+                  Divider(
+                    color: Colors.black,
+                    thickness: 1,
+                  ),
+                  /* BEGIN FAVORITES LIST */
+                  /* NEED TO ADD FUNCTIONALITY. LOOP THROUGH LIST AND GENERATE 
+                  CARDS ACCORDINGLY */
+                  Container(
+                    height: 270,
+                    child: Column(
+                      children: [
+                        Card(
+                          child: InkWell(
+                            onTap: () {
+                              //TODO Delete debugPrint and implement functionality
+                              debugPrint("Restaurant button pressed");
+                            },
+                            child: 
+                              Row(children: <Widget>[
+                                Container(
+                                  height: 40,
+                                  width: 40,
+                                  margin: EdgeInsets.all(5),
+                                  child: Image.asset('assets/images/gray_square.png'),
+                                ),
+                                Text(
+                                  'Name\n', 
+                                  style: kBodyStyle,   
+                                  textAlign: TextAlign.left,                   
+                                ),
+                              ],),
+                          ),
+                          color: Colors.black,
+                          margin: EdgeInsets.only(bottom: 10, left: 30, right: 30),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(5),
+                          ),
                         ),
-                    ),
+                    ],),
+                  ),
                   SizedBox(height: 8),
+                  Divider(
+                    color: Colors.black,
+                    thickness: 1,
+                  ),
+                  Padding(
+                      padding: EdgeInsets.only(left: 15),
+                      child: 
+                      Row(
+                        children: [
+                        Text(
+                          'Logout',
+                          style: kHeaderStyle,
+                          ),
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width - 225,
+                          ),
+                          MaterialButton(
+                            child: Icon(
+                              Icons.input,
+                            ),
+                            onPressed: () {
+                              //TODO implement functionality
+                              debugPrint("Logout button pressed");
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
                   ],
                 ),
               ),
