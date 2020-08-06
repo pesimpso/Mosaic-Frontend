@@ -1,20 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:mosaicapp/constants.dart';
 
-class SettingsIcon extends StatelessWidget {
+class CafeIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialButton(
-      splashColor: Colors.transparent,
-      highlightColor: Colors.transparent,
       child: Icon(
-        Icons.settings,
+        Icons.local_cafe,
         size: kIconSize,
         color: Colors.white,
       ),
-      minWidth: 40,
       onPressed: () {
-        Navigator.pushNamed(context, '/settings');
+        //TODO Delete debugPrint and implement functionality
         debugPrint("Setting Button Pressed");
       },
     );

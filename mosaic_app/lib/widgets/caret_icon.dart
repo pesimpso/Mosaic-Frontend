@@ -1,21 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:mosaicapp/constants.dart';
 
-class SettingsIcon extends StatelessWidget {
+class CaretIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialButton(
-      splashColor: Colors.transparent,
-      highlightColor: Colors.transparent,
       child: Icon(
-        Icons.settings,
+        Icons.keyboard_arrow_left,
         size: kIconSize,
         color: Colors.white,
       ),
       minWidth: 40,
       onPressed: () {
-        Navigator.pushNamed(context, '/settings');
-        debugPrint("Setting Button Pressed");
+        //TODO Remove debugPrint and implement functionality
+        Navigator.pop(context);
+        debugPrint("Pressed Return Button");
       },
     );
   }
