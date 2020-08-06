@@ -5,6 +5,8 @@ class SettingsIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialButton(
+      splashColor: Colors.transparent,
+      highlightColor: Colors.transparent,
       child: Icon(
         Icons.settings,
         size: kIconSize,
