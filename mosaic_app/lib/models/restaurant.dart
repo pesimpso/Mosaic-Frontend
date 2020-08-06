@@ -15,5 +15,12 @@ class Restaurant {
   bool favorited;
 
   //Parameterized constructor
-  Restaurant({this.distFromUser, this.rating, this.userRating, this.name, this.address, this.phone, this.favorited})
+  Restaurant(
+      {this.distFromUser,
+      this.rating,
+      this.userRating,
+      this.name,
+      this.address,
+      this.phone,
+      this.favorited});
 }

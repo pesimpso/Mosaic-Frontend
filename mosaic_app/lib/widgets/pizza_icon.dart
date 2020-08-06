@@ -5,6 +5,8 @@ class PizzaIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialButton(
+      highlightColor: Colors.black,
+      splashColor: Colors.black,
       child: Icon(
         Icons.local_pizza,
         size: kIconSize,

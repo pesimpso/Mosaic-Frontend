@@ -26,4 +26,6 @@ const TextStyle kBodyStyleDark = TextStyle(
   fontFamily: 'Josefin Sans:wght500',
 );
 
+const TextStyle kSmallLabelStyle = kBodyStyle;
+
 const double kIconSize = 40;

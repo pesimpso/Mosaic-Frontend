@@ -5,10 +5,21 @@ class RestaurantIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialButton(
-      child: Icon(
-        Icons.fastfood,
-        size: kIconSize,
-        color: Colors.white,
+      highlightColor: Colors.black,
+      splashColor: Colors.black,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Icon(
+            Icons.fastfood,
+            size: kIconSize,
+            color: Colors.white,
+          ),
+          Text(
+            'Restaurants',
+            style: kBodyStyle,
+          ),
+        ],
       ),
       onPressed: () {
         //TODO Delete debugPrint and implement functionality

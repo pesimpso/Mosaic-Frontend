@@ -5,6 +5,8 @@ class BarIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialButton(
+      highlightColor: Colors.black,
+      splashColor: Colors.black,
       child: Icon(
         Icons.local_bar,
         size: kIconSize,

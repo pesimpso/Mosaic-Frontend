@@ -5,10 +5,16 @@ class CafeIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialButton(
-      child: Icon(
-        Icons.local_cafe,
-        size: kIconSize,
-        color: Colors.white,
+      highlightColor: Colors.black,
+      splashColor: Colors.black,
+      child: Column(
+        children: <Widget>[
+          Icon(
+            Icons.local_cafe,
+            size: kIconSize,
+            color: Colors.white,
+          ),
+        ],
       ),
       onPressed: () {
         //TODO Delete debugPrint and implement functionality
