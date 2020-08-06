@@ -14,6 +14,10 @@ class CafeIcon extends StatelessWidget {
             size: kIconSize,
             color: Colors.white,
           ),
+          Text(
+            'Cafes',
+            style: kSmallLabelStyle,
+          ),
         ],
       ),
       onPressed: () {

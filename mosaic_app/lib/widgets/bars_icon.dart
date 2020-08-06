@@ -7,10 +7,18 @@ class BarIcon extends StatelessWidget {
     return MaterialButton(
       highlightColor: Colors.black,
       splashColor: Colors.black,
-      child: Icon(
-        Icons.local_bar,
-        size: kIconSize,
-        color: Colors.white,
+      child: Column(
+        children: <Widget>[
+          Icon(
+            Icons.local_bar,
+            size: kIconSize,
+            color: Colors.white,
+          ),
+          Text(
+            'Bars',
+            style: kSmallLabelStyle,
+          ),
+        ],
       ),
       onPressed: () {
         //TODO Delete debugPrint and implement functionality

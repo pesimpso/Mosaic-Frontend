@@ -7,10 +7,18 @@ class PizzaIcon extends StatelessWidget {
     return MaterialButton(
       highlightColor: Colors.black,
       splashColor: Colors.black,
-      child: Icon(
-        Icons.local_pizza,
-        size: kIconSize,
-        color: Colors.white,
+      child: Column(
+        children: <Widget>[
+          Icon(
+            Icons.local_pizza,
+            size: kIconSize,
+            color: Colors.white,
+          ),
+          Text(
+            'Pizza',
+            style: kSmallLabelStyle,
+          ),
+        ],
       ),
       onPressed: () {
         //TODO Delete debugPrint and implement functionality

@@ -5,6 +5,7 @@ class RestaurantIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialButton(
+      padding: EdgeInsets.all(0),
       highlightColor: Colors.black,
       splashColor: Colors.black,
       child: Column(
@@ -16,7 +17,7 @@ class RestaurantIcon extends StatelessWidget {
             color: Colors.white,
           ),
           Text(
-            'Restaurants',
+            'Food',
             style: kBodyStyle,
           ),
         ],

@@ -21,25 +21,24 @@ class _HomepageState extends State<Homepage> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.black,
-        body: Column(
-          children: [
-            NavBar(),
-            Padding(
-              padding: EdgeInsets.all(15.0),
-              child: 
-              Row(
-                children: [
+        body: Column(children: [
+          NavBar(),
+          Padding(
+            padding: EdgeInsets.all(15.0),
+            child: Row(
+              children: [
                 Text(
                   'I\'m Looking For...',
                   style: kTitleStyle,
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
-            /* BEGIN CATEGORIES BAR */
-            Padding(
-              padding: EdgeInsets.all(0),
-              child: Column(children: [
+          ),
+          /* BEGIN CATEGORIES BAR */
+          Padding(
+            padding: EdgeInsets.all(0),
+            child: Column(
+              children: [
                 Row(
                   children: [
                     Expanded(child: RestaurantIcon()),
@@ -49,25 +48,25 @@ class _HomepageState extends State<Homepage> {
                     Expanded(child: TopRatedIcon()),
                   ],
                 ),
-                ],),
+              ],
             ),
-            /* BEGIN SEARCH BAR */
-            SearchBar(),
-            /* BEGIN FEATURED RESTAURANTS */
-            Padding(
-              padding: EdgeInsets.only(bottom: 15.0, left: 15.0),
-              child: 
-              Row(
-                children: [
+          ),
+          /* BEGIN SEARCH BAR */
+          SearchBar(),
+          /* BEGIN FEATURED RESTAURANTS */
+          Padding(
+            padding: EdgeInsets.only(bottom: 15.0, left: 15.0),
+            child: Row(
+              children: [
                 Text(
                   'Minority-Owned\nRestaurants Nearby',
                   style: kTitleStyle,
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
-            ]),
           ),
-      );
+        ]),
+      ),
+    );
   }
 }
