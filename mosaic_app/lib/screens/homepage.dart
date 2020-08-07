@@ -80,7 +80,6 @@ class _HomepageState extends State<Homepage> {
                     ),
                   ],
                 ),
-                //TODO FIGURE OUT WHY THESE ARE THROWING WEIRD OVERFLOW EXCEPTIONS
                 RestaurantCarouselDisplay(
                   restaurants: carouselDummyList,
                 ),
