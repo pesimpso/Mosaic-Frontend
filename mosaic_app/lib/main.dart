@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mosaicapp/screens/businesspage.dart';
 import 'package:mosaicapp/screens/login.dart';
 import 'package:mosaicapp/screens/homepage.dart';
 import 'package:mosaicapp/screens/sign_up.dart';
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      initialRoute: Results.id,
+      initialRoute: BusinessPage.id,
       //Route String : Function pair
       routes: {
         Login.id: (context) => Login(),
@@ -24,6 +25,7 @@ class MyApp extends StatelessWidget {
         Settings.id: (context) => Settings(),
         AccountPage.id: (context) => AccountPage(),
         Results.id: (context) => Results(),
+        BusinessPage.id: (context) => BusinessPage(),
       },
     );
   }
