@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:mosaicapp/widgets/star_display.dart';
 
 class RestaurantCarouselCard extends StatelessWidget {
-  Restaurant restaurant;
+  final Restaurant restaurant;
 
   RestaurantCarouselCard(@required this.restaurant);
 
