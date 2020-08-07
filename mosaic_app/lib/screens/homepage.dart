@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:mosaicapp/models/restaurant.dart';
 import 'package:mosaicapp/widgets/nav_bar.dart';
+import 'package:mosaicapp/widgets/restaurant_carousel_display.dart';
 import 'package:mosaicapp/widgets/restaurant_icon.dart';
 import 'package:mosaicapp/widgets/cafe_icon.dart';
 import 'package:mosaicapp/widgets/pizza_icon.dart';
@@ -16,6 +18,15 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
+  //TODO Use provider to pull actual carousel lists
+  List<Restaurant> carouselDummyList = [
+    Restaurant(name: 'test'),
+    Restaurant(name: 'test'),
+    Restaurant(name: 'test'),
+    Restaurant(name: 'test'),
+    Restaurant(name: 'test'),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -41,7 +52,7 @@ class _HomepageState extends State<Homepage> {
               children: [
                 Row(
                   children: [
-                    Expanded(child: RestaurantIcon()),
+                    Expanded(child: FoodIcon()),
                     Expanded(child: CafeIcon()),
                     Expanded(child: PizzaIcon()),
                     Expanded(child: BarIcon()),
@@ -56,11 +67,24 @@ class _HomepageState extends State<Homepage> {
           /* BEGIN FEATURED RESTAURANTS */
           Padding(
             padding: EdgeInsets.only(bottom: 15.0, left: 15.0),
-            child: Row(
-              children: [
-                Text(
-                  'Minority-Owned\nRestaurants Nearby',
-                  style: kTitleStyle,
+            child: Column(
+              children: <Widget>[
+                Row(
+                  children: [
+                    Text(
+                      'Minority-Owned\nRestaurants Nearby',
+                      style: kTitleStyle,
+                    ),
+                  ],
+                ),
+                RestaurantCarouselDisplay(
+                  restaurants: carouselDummyList,
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                RestaurantCarouselDisplay(
+                  restaurants: carouselDummyList,
                 ),
               ],
             ),

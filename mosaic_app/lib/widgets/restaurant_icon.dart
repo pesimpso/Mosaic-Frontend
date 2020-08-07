@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mosaicapp/constants.dart';
 
-class RestaurantIcon extends StatelessWidget {
+class FoodIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialButton(
