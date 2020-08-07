@@ -24,7 +24,7 @@ class RestaurantCarouselDisplay extends StatelessWidget {
         reverse: true,
         autoPlay: false,
         enlargeCenterPage: true,
-        viewportFraction: 0.5,
+        viewportFraction: 0.4,
       ),
       items: cards,
     );

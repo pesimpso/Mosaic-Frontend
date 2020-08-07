@@ -20,11 +20,14 @@ class Homepage extends StatefulWidget {
 class _HomepageState extends State<Homepage> {
   //TODO Use provider to pull actual carousel lists
   List<Restaurant> carouselDummyList = [
-    Restaurant(name: 'test'),
-    Restaurant(name: 'test'),
-    Restaurant(name: 'test'),
-    Restaurant(name: 'test'),
-    Restaurant(name: 'test'),
+    Restaurant(
+        name: 'Name Name Name Name Name Name Name',
+        distFromUser: 1.2,
+        rating: 3.5),
+    Restaurant(name: 'Name', distFromUser: 1.2, rating: 3.5),
+    Restaurant(name: 'Name', distFromUser: 1.2, rating: 3.5),
+    Restaurant(name: 'test', distFromUser: 1.2, rating: 3.5),
+    Restaurant(name: 'test', distFromUser: 1.2, rating: 3.5),
   ];
 
   @override
@@ -77,6 +80,7 @@ class _HomepageState extends State<Homepage> {
                     ),
                   ],
                 ),
+                //TODO FIGURE OUT WHY THESE ARE THROWING WEIRD OVERFLOW EXCEPTIONS
                 RestaurantCarouselDisplay(
                   restaurants: carouselDummyList,
                 ),
