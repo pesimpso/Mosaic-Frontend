@@ -83,8 +83,9 @@ class _LoginState extends State<Login> {
                 /* NEED TO ADD FUNCTIONALITY */
                 onPressed: () {
                   if (Provider.of<AppData>(context, listen: false)
-                      .validateLogin(this.data))
+                      .validateLogin(this.data)) {
                     Navigator.pushNamed(context, Homepage.id);
+                  }
                 },
               ),
             ),

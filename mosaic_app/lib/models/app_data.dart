@@ -28,7 +28,13 @@ class AppData extends ChangeNotifier {
         data.password == "") {
       return false;
     }
-    //TODO IMPLEMENT SERVER VALIDATION
+    bool isValid = true;
+
+    //TODO IMPLEMENT SERVER VALIDATION HERE
+
+    if (isValid) {
+      setGuest(false);
+    }
     return true;
   }
 
@@ -42,7 +48,13 @@ class AppData extends ChangeNotifier {
         data.password == "") {
       return false;
     }
-    //TODO IMPLEMENT SERVER VALIDATION
+    bool isValid = true;
+
+    //TODO IMPLEMENT SERVER VALIDATION HERE
+
+    if (isValid) {
+      setGuest(false);
+    }
     return true;
   }
 }
