@@ -30,11 +30,13 @@ class StarDisplay extends StatelessWidget {
     while (tempRating > 0) {
       double remainder = tempRating % 1;
       if (remainder == 0) {
-        icons.add(Icon(
-          Icons.star,
-          color: iconColor,
-          size: this.height,
-        ));
+        icons.insert(
+            0,
+            Icon(
+              Icons.star,
+              color: iconColor,
+              size: this.height,
+            ));
       } else {
         icons.add(Icon(
           Icons.star_half,
@@ -42,7 +44,11 @@ class StarDisplay extends StatelessWidget {
           size: this.height,
         ));
       }
-      tempRating -= remainder;
+      if (remainder == 0) {
+        tempRating -= 1;
+      } else {
+        tempRating -= remainder;
+      }
     }
 
     while (icons.length < 5) {

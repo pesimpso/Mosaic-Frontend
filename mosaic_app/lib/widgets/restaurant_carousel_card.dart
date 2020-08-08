@@ -44,9 +44,9 @@ class RestaurantCarouselCard extends StatelessWidget {
                 maxLines: 1,
                 style: kBodyStyleDark,
               ),
-//              StarDisplay(
-//                rating: restaurant.rating,
-//              ),
+              StarDisplay(
+                rating: restaurant.rating,
+              ),
             ],
           ),
         ),
