@@ -4,6 +4,7 @@ import 'package:mosaicapp/widgets/nav_bar.dart';
 import 'package:mosaicapp/constants.dart';
 import 'package:mosaicapp/widgets/search_bar.dart';
 import 'package:mosaicapp/models/restaurant.dart';
+import 'package:mosaicapp/widgets/sort_dropdown.dart';
 import 'package:mosaicapp/widgets/star_display.dart';
 
 class Results extends StatefulWidget {
@@ -27,75 +28,29 @@ class _ResultState extends State<Results> {
             NavBar(),
             SearchBar(),
             /* BEGIN FILTERS. NEED TO TURN INTO DROPDOWNS*/
-            Row(children: [
-              Container(
-                width: 100,
-                height: 30,
-                margin: EdgeInsets.only(left: 15, right: 40),
-                child: RaisedButton(
-                  child: Text(
-                    'Distance',
-                    style: kBodyStyleDark,
+            Container(
+              margin: EdgeInsets.only(left: 15),
+              //TODO Align "sort by" button with edge (only if time)
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SortDropDown(
+                    name: 'Distance',
                   ),
-                  color: Colors.white,
-                  clipBehavior: Clip.hardEdge,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(5),
+                  SortDropDown(
+                    name: 'Rating',
                   ),
-                  /* NEED TO ADD FUNCTIONALITY */
-                  onPressed: () {
-                    //TODO Delete debugPrint and implement functionality
-                    debugPrint("Distance dropdown pressed");
-                  },
-                ),
+                  SortDropDown(
+                    name: 'Sort By',
+                  )
+                ],
               ),
-              Container(
-                width: 100,
-                height: 30,
-                margin: EdgeInsets.only(right: 40),
-                child: RaisedButton(
-                  child: Text(
-                    'Rating',
-                    style: kBodyStyleDark,
-                  ),
-                  color: Colors.white,
-                  clipBehavior: Clip.hardEdge,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(5),
-                  ),
-                  /* NEED TO ADD FUNCTIONALITY */
-                  onPressed: () {
-                    //TODO Delete debugPrint and implement functionality
-                    debugPrint("Rating dropdown pressed");
-                  },
-                ),
-              ),
-              Container(
-                width: 100,
-                height: 30,
-                child: RaisedButton(
-                  child: Text(
-                    'Sort by...',
-                    style: kBodyStyleDark,
-                  ),
-                  color: Colors.white,
-                  clipBehavior: Clip.hardEdge,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(5),
-                  ),
-                  /* NEED TO ADD FUNCTIONALITY */
-                  onPressed: () {
-                    //TODO Delete debugPrint and implement functionality
-                    debugPrint("Rating dropdown pressed");
-                  },
-                ),
-              ),
-            ]),
+            ),
             /* NEED TO ADD FUNCTIONALITY. */
             Container(
-              margin: EdgeInsets.only(top: 15),
+              margin: EdgeInsets.only(top: 15, left: 15, right: 15),
               height: 450,
-              width: MediaQuery.of(context).size.width - 30,
+              width: double.infinity,
               child: ListView.separated(
                 scrollDirection: Axis.vertical,
                 itemBuilder: (BuildContext context, int index) {
