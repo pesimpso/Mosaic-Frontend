@@ -1,6 +1,9 @@
 //Data-only class used by provider to share data across the app
 import 'package:flutter/material.dart';
 import 'package:mosaicapp/models/login_register_data.dart';
+import 'package:mosaicapp/models/query.dart';
+import 'package:mosaicapp/models/query_return_data.dart';
+import 'package:mosaicapp/models/restaurant.dart';
 
 class AppData extends ChangeNotifier {
   bool _guest;
@@ -56,5 +59,44 @@ class AppData extends ChangeNotifier {
       setGuest(false);
     }
     return true;
+  }
+
+  //TODO Delete below
+  List<Restaurant> dummyList = [
+    Restaurant(
+        name: 'Name Name Name Name Name Name Name',
+        distFromUser: 1.2,
+        rating: 3.5),
+    Restaurant(name: 'Name', distFromUser: 1.2, rating: 3.5),
+    Restaurant(name: 'Name', distFromUser: 1.2, rating: 3.5),
+    Restaurant(name: 'test', distFromUser: 1.2, rating: 3.5),
+    Restaurant(name: 'test', distFromUser: 1.2, rating: 3.5),
+  ];
+
+  QueryReturnData query(Query query) {
+    QueryReturnData returnData = QueryReturnData();
+    //Handle text-based queries
+    if (query.queryType == QueryType.Text) {
+      //TODO implement query behavior, return a list of restaurants
+      //TODO delete hardcoded results
+      returnData.success = true;
+      returnData.result = dummyList;
+      //Handle categorical queries
+    } else if (query.queryType == QueryType.Category) {
+      //TODO implement query behavior, return a list of restaurants
+      //TODO delete hardcoded results
+      returnData.success = true;
+      returnData.result = dummyList;
+      //Handle geospatial queries
+    } else if (query.queryType == QueryType.Geospatial) {
+      //TODO implement query behavior, return a list of restaurants
+      //TODO delete hardcoded results
+      returnData.success = true;
+      returnData.result = dummyList;
+    } else {
+      return null;
+    }
+
+    return returnData;
   }
 }

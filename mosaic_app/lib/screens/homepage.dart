@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:mosaicapp/models/app_data.dart';
+import 'package:mosaicapp/models/coordinates.dart';
+import 'package:mosaicapp/models/query.dart';
+import 'package:mosaicapp/models/query_return_data.dart';
+import 'package:mosaicapp/models/restaurant.dart';
 import 'package:mosaicapp/widgets/nav_bar.dart';
-import 'package:mosaicapp/widgets/restaurant_carousel_card.dart';
 import 'package:mosaicapp/widgets/restaurant_carousel_display.dart';
 import 'package:mosaicapp/widgets/restaurant_icon.dart';
 import 'package:mosaicapp/widgets/cafe_icon.dart';
@@ -9,8 +13,7 @@ import 'package:mosaicapp/widgets/bars_icon.dart';
 import 'package:mosaicapp/widgets/top-rated_icon.dart';
 import 'package:mosaicapp/constants.dart';
 import 'package:mosaicapp/widgets/search_bar.dart';
-
-import 'package:mosaicapp/models/restaurant.dart';
+import 'package:provider/provider.dart';
 
 class Homepage extends StatefulWidget {
   static const String id = '/homepage';
@@ -20,20 +23,51 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
-  //TODO Use provider to pull actual carousel lists
-  List<Restaurant> carouselDummyList = [
-    Restaurant(
-        name: 'Name Name Name Name Name Name Name',
-        distFromUser: 1.2,
-        rating: 3.5),
-    Restaurant(name: 'Name', distFromUser: 1.2, rating: 3.5),
-    Restaurant(name: 'Name', distFromUser: 1.2, rating: 3.5),
-    Restaurant(name: 'test', distFromUser: 1.2, rating: 3.5),
-    Restaurant(name: 'test', distFromUser: 1.2, rating: 3.5),
-  ];
+  //TODO Create geospatial query
+
+  Coordinates userCoords;
+
+  //Master list to track geospatial query results which will then be divided among the list
+  List<Restaurant> geospatialQueryResult;
+
+  Coordinates getUserCoordinates() {
+    //TODO Implement, delete hardcoded values
+    return Coordinates(latitude: 34.0522, longitude: -118.2437);
+  }
+
+  //Gets the geospatial query results, returns it for list display
+  List<Restaurant> getCarouselList(int whichHalf) {
+    //If a carousel is for less than one half of the list, give it nothing.
+    if (whichHalf > 2 || whichHalf < 1) {
+      return List<Restaurant>();
+    }
+    //Get geospatial results if we don't already have them
+    if (geospatialQueryResult == null) {
+      QueryReturnData returnData = Provider.of<AppData>(context).query(
+          Query(queryType: QueryType.Geospatial, coordinates: userCoords));
+      //If the query fails, return an empty list
+      if (returnData.success == false) {
+        return List<Restaurant>();
+      }
+
+      geospatialQueryResult = returnData.result;
+    }
+
+    //Once we have the data, divide it up according to whichHalf and send it back
+    if (whichHalf == 1) {
+      return geospatialQueryResult.sublist(
+          0, geospatialQueryResult.length ~/ 2);
+    } else if (whichHalf == 2) {
+      return geospatialQueryResult.sublist(
+          geospatialQueryResult.length ~/ 2, geospatialQueryResult.length);
+    } else {
+      return List<Restaurant>();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
+    userCoords = getUserCoordinates();
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.black,
@@ -83,13 +117,13 @@ class _HomepageState extends State<Homepage> {
                   ],
                 ),
                 RestaurantCarouselDisplay(
-                  restaurants: carouselDummyList,
+                  restaurants: getCarouselList(1),
                 ),
                 SizedBox(
                   height: 20,
                 ),
                 RestaurantCarouselDisplay(
-                  restaurants: carouselDummyList,
+                  restaurants: getCarouselList(2),
                 ),
               ],
             ),
