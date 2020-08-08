@@ -19,7 +19,7 @@ class RestaurantCarouselDisplay extends StatelessWidget {
   Widget build(BuildContext context) {
     return CarouselSlider(
       options: CarouselOptions(
-        height: 175,
+        height: 190,
         enableInfiniteScroll: true,
         reverse: true,
         autoPlay: false,

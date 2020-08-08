@@ -97,7 +97,7 @@ class _HomepageState extends State<Homepage> {
           SearchBar(),
           /* BEGIN FEATURED RESTAURANTS */
           Padding(
-            padding: EdgeInsets.only(bottom: 15.0),
+            padding: EdgeInsets.only(bottom: 0),
             child: Column(
               children: <Widget>[
                 Padding(
