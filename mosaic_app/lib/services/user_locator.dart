@@ -13,11 +13,17 @@ class UserLocator {
 
   Future<void> getCurrentLocation(
       {LocationAccuracy locAcc = LocationAccuracy.high}) async {
-    position = await geolocator.getCurrentPosition(desiredAccuracy: locAcc);
-    userLongitude = position.longitude;
-    userLatitude = position.latitude;
+    GeolocationStatus result =
+        await geolocator.checkGeolocationPermissionStatus();
+    if (result == GeolocationStatus.denied) {
+      position = null;
+    } else {
+      position = await geolocator.getCurrentPosition(desiredAccuracy: locAcc);
+      userLongitude = position.longitude;
+      userLatitude = position.latitude;
 
-    debugPrint(userLatitude.toString());
-    debugPrint(userLongitude.toString());
+      debugPrint(userLatitude.toString());
+      debugPrint(userLongitude.toString());
+    }
   }
 }

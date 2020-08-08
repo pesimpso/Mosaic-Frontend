@@ -138,10 +138,15 @@ class AppData extends ChangeNotifier {
       returnData.result = dummyList;
       //Handle geospatial queries
     } else if (query.queryType == QueryType.Geospatial) {
-      //TODO implement query behavior, return a list of restaurants
-      //TODO delete hardcoded results
-      returnData.success = true;
-      returnData.result = dummyList;
+      if (_locator == null || _locator.position == null) {
+        returnData.success = false;
+        returnData.result = List<Restaurant>();
+      } else {
+        //TODO implement query behavior, return a list of restaurants
+        //TODO delete hardcoded results
+        returnData.success = true;
+        returnData.result = dummyList;
+      }
     } else {
       return null;
     }
