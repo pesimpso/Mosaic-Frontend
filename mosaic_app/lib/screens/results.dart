@@ -6,8 +6,8 @@ import 'package:mosaicapp/widgets/restaurant_result_card.dart';
 import 'package:mosaicapp/widgets/search_bar.dart';
 import 'package:mosaicapp/models/restaurant.dart';
 import 'package:mosaicapp/widgets/sort_dropdown.dart';
-import 'package:mosaicapp/widgets/star_display.dart';
 
+//Pass a List<Restaurant> as a Navigator argument when pushing this route
 class Results extends StatefulWidget {
   static const String id = '/results';
 
@@ -16,28 +16,20 @@ class Results extends StatefulWidget {
 }
 
 class _ResultState extends State<Results> {
-  final List<RestaurantResultCard> data = [
-    RestaurantResultCard(
-      Restaurant(
-        name: 'Name',
-        distFromUser: 1.2,
-        rating: 3.5,
-        phone: "(123) 456-7890",
-        address: "123 Road St.",
-      ),
-    ),
-    RestaurantResultCard(
-      Restaurant(
-        name: 'Name',
-        distFromUser: 1.2,
-        rating: 3.5,
-        address: "123 Road St.",
-      ),
-    )
-  ];
+  List<Restaurant> _restaurants;
+  List<RestaurantResultCard> cards = List<RestaurantResultCard>();
 
+  void constructCards() {
+    for (Restaurant restaurant in _restaurants) {
+      cards.add(RestaurantResultCard(restaurant));
+    }
+  }
+
+  //TODO IF TIME ALLOWS, AUT0-FILL SEARCH BOX W/ PREVIOUS QUERY BY PASSING IT INTO SEARCHBAR
   @override
   Widget build(BuildContext context) {
+    _restaurants = ModalRoute.of(context).settings.arguments;
+    constructCards();
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.black,
@@ -65,18 +57,20 @@ class _ResultState extends State<Results> {
               ),
             ),
             /* NEED TO ADD FUNCTIONALITY. */
-            Container(
-              margin: EdgeInsets.only(top: 15, left: 15, right: 15),
-              height: 450,
-              width: double.infinity,
-              child: ListView.separated(
-                scrollDirection: Axis.vertical,
-                itemBuilder: (BuildContext context, int index) {
-                  return data[index];
-                },
-                separatorBuilder: (BuildContext context, int index) =>
-                    SizedBox(height: 10),
-                itemCount: data.length,
+            Expanded(
+              child: Container(
+                margin: EdgeInsets.only(top: 15, left: 15, right: 15),
+                height: 450,
+                width: double.infinity,
+                child: ListView.separated(
+                  scrollDirection: Axis.vertical,
+                  itemBuilder: (BuildContext context, int index) {
+                    return cards[index];
+                  },
+                  separatorBuilder: (BuildContext context, int index) =>
+                      SizedBox(height: 10),
+                  itemCount: cards.length,
+                ),
               ),
             ),
           ],

@@ -64,13 +64,40 @@ class AppData extends ChangeNotifier {
   //TODO Delete below
   List<Restaurant> dummyList = [
     Restaurant(
-        name: 'Name Name Name Name Name Name Name',
-        distFromUser: 1.2,
-        rating: 3.5),
-    Restaurant(name: 'Name', distFromUser: 1.2, rating: 3.5),
-    Restaurant(name: 'Name', distFromUser: 1.2, rating: 3.5),
-    Restaurant(name: 'test', distFromUser: 1.2, rating: 3.5),
-    Restaurant(name: 'test', distFromUser: 1.2, rating: 3.5),
+      name: 'Name1',
+      distFromUser: 1.2,
+      rating: 3.5,
+      phone: "(123) 456-7890",
+      address: "123 Road St.",
+    ),
+    Restaurant(
+      name: 'Name2',
+      distFromUser: 1.2,
+      rating: 3.5,
+      phone: "(123) 456-7890",
+      address: "123 Road St.",
+    ),
+    Restaurant(
+      name: 'Name3',
+      distFromUser: 1.2,
+      rating: 3.5,
+      phone: "(123) 456-7890",
+      address: "123 Road St.",
+    ),
+    Restaurant(
+      name: 'Name4',
+      distFromUser: 1.2,
+      rating: 3.5,
+      phone: "(123) 456-7890",
+      address: "123 Road St.",
+    ),
+    Restaurant(
+      name: 'Name5',
+      distFromUser: 1.2,
+      rating: 3.5,
+      phone: "(123) 456-7890",
+      address: "123 Road St.",
+    ),
   ];
 
   QueryReturnData query(Query query) {
