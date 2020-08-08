@@ -39,19 +39,18 @@ class _ResultState extends State<Results> {
             SearchBar(),
             /* BEGIN FILTERS. NEED TO TURN INTO DROPDOWNS*/
             Container(
-              margin: EdgeInsets.only(left: 15),
-              //TODO Align "sort by" button with edge (only if time)
+              margin: EdgeInsets.only(left: 15, right: 15),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   SortDropDown(
-                    name: 'Distance',
+                    type: SortType.Distance,
                   ),
                   SortDropDown(
-                    name: 'Rating',
+                    type: SortType.Rating,
                   ),
                   SortDropDown(
-                    name: 'Sort By',
+                    type: SortType.Sort,
                   )
                 ],
               ),
