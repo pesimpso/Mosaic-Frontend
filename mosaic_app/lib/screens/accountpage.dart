@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:mosaicapp/constants.dart';
+import 'package:provider/provider.dart';
+import 'package:mosaicapp/models/app_data.dart';
 import 'package:mosaicapp/widgets/caret_icon.dart';
 import 'package:mosaicapp/widgets/heart_icon.dart';
+
+import 'login.dart';
 
 class AccountPage extends StatefulWidget {
   static const String id = '/accountpage';
@@ -155,8 +159,8 @@ class _AccountPageState extends State<AccountPage> {
                             Icons.input,
                           ),
                           onPressed: () {
-                            //TODO implement functionality
-                            debugPrint("Logout button pressed");
+////                            Provider.of<AppData>(context, listen:false).logOut();
+//                            Navigator.pushNamed(context, Login.id);
                           },
                         ),
                       ],

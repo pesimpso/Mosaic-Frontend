@@ -11,6 +11,14 @@ class UserLocator {
     this.getCurrentLocation();
   }
 
+  Future<Position> getUserPosition() async {
+    if (this.position == null) {
+      await getCurrentLocation();
+    } else {
+      return this.position;
+    }
+  }
+
   Future<void> getCurrentLocation(
       {LocationAccuracy locAcc = LocationAccuracy.high}) async {
     GeolocationStatus result =

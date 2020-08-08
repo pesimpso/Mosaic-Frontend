@@ -11,9 +11,9 @@ class AppData extends ChangeNotifier {
   bool _guest;
   UserLocator _locator;
 
-  AppData({bool guest, UserLocator locator}) {
+  AppData({bool guest}) {
     this._guest = guest;
-    this._locator = locator;
+    this._locator = UserLocator();
   }
 
   void setGuest(bool newGuestVal) {
@@ -83,6 +83,11 @@ class AppData extends ChangeNotifier {
     return true;
   }
 
+//  //Logs out the current user if applicable
+//  void logOut() {
+//    //TODO IMPLEMENT
+//  }
+
   //TODO Delete below
   List<Restaurant> dummyList = [
     Restaurant(
@@ -122,6 +127,15 @@ class AppData extends ChangeNotifier {
     ),
   ];
 
+  Future<Position> loadUserPosition() async {
+    if (_locator == null) {
+      return null;
+    }
+
+    this._locator.position = await _locator.getUserPosition();
+    return this._locator.position;
+  }
+
   QueryReturnData query(Query query) {
     QueryReturnData returnData = QueryReturnData();
     //Handle text-based queries
@@ -138,7 +152,8 @@ class AppData extends ChangeNotifier {
       returnData.result = dummyList;
       //Handle geospatial queries
     } else if (query.queryType == QueryType.Geospatial) {
-      if (_locator == null || _locator.position == null) {
+      loadUserPosition();
+      if (_locator == null || _locator.getUserPosition() == null) {
         returnData.success = false;
         returnData.result = List<Restaurant>();
       } else {
