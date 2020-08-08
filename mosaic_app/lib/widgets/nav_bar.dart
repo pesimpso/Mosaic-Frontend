@@ -23,7 +23,12 @@ class NavBar extends StatelessWidget {
                     style: kTitleStyle,
                   ),
                   onTap: () {
-                    Navigator.pushNamed(context, Homepage.id);
+                    Navigator.popUntil(context, (route) {
+                      if (route.settings.name == Homepage.id) {
+                        return true;
+                      }
+                      return false;
+                    });
                   },
                 ),
               ],
