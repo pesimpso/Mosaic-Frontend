@@ -11,6 +11,7 @@ class AccountPage extends StatefulWidget {
 }
 
 class _AccountPageState extends State<AccountPage> {
+  final List<String> data = ['name', 'name', 'name'];
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -97,9 +98,10 @@ class _AccountPageState extends State<AccountPage> {
                   CARDS ACCORDINGLY */
                   Container(
                     height: 270,
-                    child: Column(
-                      children: [
-                        Card(
+                    child: ListView.separated(
+                      itemCount: data.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Card(
                           child: InkWell(
                             onTap: () {
                               //TODO Delete debugPrint and implement functionality
@@ -128,8 +130,10 @@ class _AccountPageState extends State<AccountPage> {
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(5),
                           ),
-                        ),
-                      ],
+                        );
+                      },
+                      separatorBuilder: (BuildContext context, int index) =>
+                          SizedBox(height: 10),
                     ),
                   ),
                   SizedBox(height: 8),
