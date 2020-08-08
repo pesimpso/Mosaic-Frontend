@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mosaicapp/widgets/heart_icon_small.dart';
 import 'package:mosaicapp/widgets/nav_bar.dart';
-import 'package:mosaicapp/constants.dart';
 import 'package:mosaicapp/widgets/restaurant_result_card.dart';
 import 'package:mosaicapp/widgets/search_bar.dart';
 import 'package:mosaicapp/models/restaurant.dart';

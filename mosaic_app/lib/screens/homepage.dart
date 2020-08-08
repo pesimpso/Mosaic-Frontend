@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mosaicapp/models/app_data.dart';
-import 'package:mosaicapp/models/coordinates.dart';
+import 'package:mosaicapp/services/user_locator.dart';
 import 'package:mosaicapp/models/query.dart';
 import 'package:mosaicapp/models/query_return_data.dart';
 import 'package:mosaicapp/models/restaurant.dart';
@@ -23,17 +23,8 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
-  //TODO Create geospatial query
-
-  Coordinates userCoords;
-
   //Master list to track geospatial query results which will then be divided among the list
   List<Restaurant> geospatialQueryResult;
-
-  Coordinates getUserCoordinates() {
-    //TODO Implement, delete hardcoded values
-    return Coordinates(latitude: 34.0522, longitude: -118.2437);
-  }
 
   //Gets the geospatial query results, returns it for list display
   List<Restaurant> getCarouselList(int whichHalf) {
@@ -43,8 +34,9 @@ class _HomepageState extends State<Homepage> {
     }
     //Get geospatial results if we don't already have them
     if (geospatialQueryResult == null) {
-      QueryReturnData returnData = Provider.of<AppData>(context).query(
-          Query(queryType: QueryType.Geospatial, coordinates: userCoords));
+      QueryReturnData returnData = Provider.of<AppData>(context).query(Query(
+          queryType: QueryType.Geospatial,
+          userPosition: Provider.of<AppData>(context).getUserLocation()));
       //If the query fails, return an empty list
       if (returnData.success == false) {
         return List<Restaurant>();
@@ -67,7 +59,7 @@ class _HomepageState extends State<Homepage> {
 
   @override
   Widget build(BuildContext context) {
-    userCoords = getUserCoordinates();
+    Provider.of<AppData>(context).setLocator(UserLocator());
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.black,
@@ -105,16 +97,19 @@ class _HomepageState extends State<Homepage> {
           SearchBar(),
           /* BEGIN FEATURED RESTAURANTS */
           Padding(
-            padding: EdgeInsets.only(bottom: 15.0, left: 15.0),
+            padding: EdgeInsets.only(bottom: 15.0),
             child: Column(
               children: <Widget>[
-                Row(
-                  children: [
-                    Text(
-                      'Minority-Owned\nRestaurants Nearby',
-                      style: kTitleStyle,
-                    ),
-                  ],
+                Padding(
+                  padding: EdgeInsets.only(left: 15.0),
+                  child: Row(
+                    children: [
+                      Text(
+                        'Minority-Owned\nRestaurants Nearby',
+                        style: kTitleStyle,
+                      ),
+                    ],
+                  ),
                 ),
                 RestaurantCarouselDisplay(
                   restaurants: getCarouselList(1),

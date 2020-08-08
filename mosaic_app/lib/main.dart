@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:mosaicapp/screens/businesspage.dart';
 import 'package:mosaicapp/screens/login.dart';
 import 'package:mosaicapp/screens/homepage.dart';
@@ -22,6 +23,7 @@ class MyApp extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) => AppData(),
       child: MaterialApp(
+        theme: ThemeData.light(),
         initialRoute: Login.id,
         //Route String : Function pair
         routes: {

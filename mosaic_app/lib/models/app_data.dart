@@ -1,15 +1,19 @@
-//Data-only class used by provider to share data across the app
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:mosaicapp/models/login_register_data.dart';
 import 'package:mosaicapp/models/query.dart';
 import 'package:mosaicapp/models/query_return_data.dart';
 import 'package:mosaicapp/models/restaurant.dart';
+import 'package:mosaicapp/services/user_locator.dart';
 
+//Data-only class used by provider to share and manipulate data across the app
 class AppData extends ChangeNotifier {
   bool _guest;
+  UserLocator _locator;
 
-  AppData({bool guest}) {
+  AppData({bool guest, UserLocator locator}) {
     this._guest = guest;
+    this._locator = locator;
   }
 
   void setGuest(bool newGuestVal) {
@@ -19,6 +23,24 @@ class AppData extends ChangeNotifier {
 
   bool getGuest() {
     return this._guest;
+  }
+
+  void setLocator(UserLocator locator) {
+    _locator = locator;
+  }
+
+  Position getUserLocation() {
+    if (_locator == null) {
+      return null;
+    }
+
+    return _locator.position;
+  }
+
+  void refreshUserLocation() {
+    if (_locator != null) {
+      _locator.getCurrentLocation();
+    }
   }
 
   bool validateLogin(LoginRegisterData data) {
