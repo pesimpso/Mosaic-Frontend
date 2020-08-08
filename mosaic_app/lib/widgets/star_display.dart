@@ -26,6 +26,7 @@ class StarDisplay extends StatelessWidget {
     List<Icon> icons = List<Icon>();
     double tempRating = rating;
 
+    //build list
     while (tempRating > 0) {
       double remainder = tempRating % 1;
       if (remainder == 0) {
