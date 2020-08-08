@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) => AppData(),
       child: MaterialApp(
-        initialRoute: BusinessPage.id,
+        initialRoute: Login.id,
         //Route String : Function pair
         routes: {
           Login.id: (context) => Login(),
