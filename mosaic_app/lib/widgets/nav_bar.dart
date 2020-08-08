@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mosaicapp/constants.dart';
+import 'package:mosaicapp/screens/homepage.dart';
 import 'package:mosaicapp/widgets/account_icon.dart';
 import 'package:mosaicapp/widgets/settings_icon.dart';
 
@@ -16,24 +17,29 @@ class NavBar extends StatelessWidget {
                 SizedBox(
                   width: 15,
                 ),
-                Text(
-                  'Mosaic',
-                  style: kTitleStyle,
+                GestureDetector(
+                  child: Text(
+                    'Mosaic',
+                    style: kTitleStyle,
+                  ),
+                  onTap: () {
+                    Navigator.pushNamed(context, Homepage.id);
+                  },
                 ),
               ],
             ),
-             Container(
-                child: Row(
-                  children: <Widget>[
-                    Expanded(child: SettingsIcon()),
-                    Expanded(child: AccountIcon()),
-                    SizedBox(
-                      width: 25,
-                    ),
-                  ],
-                ),
-                width: 110,
+            Container(
+              child: Row(
+                children: <Widget>[
+                  Expanded(child: SettingsIcon()),
+                  Expanded(child: AccountIcon()),
+                  SizedBox(
+                    width: 25,
+                  ),
+                ],
               ),
+              width: 110,
+            ),
           ],
         ),
         Container(
