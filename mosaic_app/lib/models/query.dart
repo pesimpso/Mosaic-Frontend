@@ -8,7 +8,11 @@ class Query {
   Category queryCategory;
   Coordinates coordinates;
 
-  Query({@required this.queryType, this.queryText, this.coordinates});
+  Query(
+      {@required this.queryType,
+      this.queryText,
+      this.coordinates,
+      this.queryCategory});
 }
 
 enum Category { Food, Cafes, Pizza, Bars, Top }
