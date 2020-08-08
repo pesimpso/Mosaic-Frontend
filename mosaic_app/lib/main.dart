@@ -31,16 +31,7 @@ class MyApp extends StatelessWidget {
           Settings.id: (context) => Settings(),
           AccountPage.id: (context) => AccountPage(),
           Results.id: (context) => Results(),
-          //TODO Drop the hard-coded restaurant instance here, figure out data interchange to pass it in
-          BusinessPage.id: (context) => BusinessPage(
-                restaurant: Restaurant(
-                  name: 'Name',
-                  distFromUser: 1.2,
-                  rating: 3.5,
-                  phone: "(123) 456-7890",
-                  address: "123 Road St.",
-                ),
-              ),
+          BusinessPage.id: (context) => BusinessPage(),
         },
       ),
     );

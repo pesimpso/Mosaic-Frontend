@@ -9,11 +9,9 @@ import 'package:mosaicapp/widgets/caret_icon_dark.dart';
 class BusinessPage extends StatelessWidget {
   static const String id = '/businesspage';
 
-  final Restaurant restaurant;
-
-  BusinessPage({@required this.restaurant});
   @override
   Widget build(BuildContext context) {
+    Restaurant restaurant = ModalRoute.of(context).settings.arguments;
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.black,

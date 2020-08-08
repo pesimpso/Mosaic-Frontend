@@ -17,8 +17,7 @@ class SearchBar extends StatelessWidget {
     return Column(children: [
       Padding(
         padding: EdgeInsets.all(15.0),
-        child: TextFormField(
-          initialValue: existingText,
+        child: TextField(
           style: kBodyStyleDark,
           enabled: true,
           decoration: InputDecoration(
@@ -27,7 +26,7 @@ class SearchBar extends StatelessWidget {
             border: const OutlineInputBorder(),
             hintText: 'Search for...',
           ),
-          onSaved: (String queryText) {
+          onSubmitted: (String queryText) {
             QueryReturnData returnData = Provider.of<AppData>(context,
                     listen: false)
                 .query(Query(queryType: QueryType.Text, queryText: queryText));
