@@ -35,7 +35,9 @@ class _SortDropDownState extends State<SortDropDown> {
       showStarPicker();
     }
     //Handle sort by... sorting
-    else if (widget.type == SortType.Sort) {}
+    else if (widget.type == SortType.Sort) {
+      showSortPicker();
+    }
   }
 
   void showStarPicker() {
@@ -62,6 +64,41 @@ class _SortDropDownState extends State<SortDropDown> {
                   Text('3+ Stars'),
                   Text('2+ Stars'),
                   Text('1+ Stars'),
+                ],
+                itemExtent: 35,
+                onSelectedItemChanged: (int select) {
+                  //TODO Implement Sort Functionality
+                  debugPrint(select.toString());
+                },
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  void showSortPicker() {
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext builder) {
+        return Container(
+          color: Color.fromARGB(0, 0, 0, 0),
+          height: 200,
+          child: Container(
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(20),
+              ),
+            ),
+            child: Padding(
+              padding: EdgeInsets.only(bottom: 40),
+              child: CupertinoPicker(
+                children: [
+                  Text('No Preference'),
+                  Text('Rating'),
+                  Text('Distance'),
                 ],
                 itemExtent: 35,
                 onSelectedItemChanged: (int select) {
