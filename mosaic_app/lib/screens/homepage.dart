@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mosaicapp/widgets/nav_bar.dart';
+import 'package:mosaicapp/widgets/restaurant_carousel_card.dart';
 import 'package:mosaicapp/widgets/restaurant_carousel_display.dart';
 import 'package:mosaicapp/widgets/restaurant_icon.dart';
 import 'package:mosaicapp/widgets/cafe_icon.dart';
@@ -81,15 +82,15 @@ class _HomepageState extends State<Homepage> {
                     ),
                   ],
                 ),
-//                RestaurantCarouselDisplay(
-//                  restaurants: carouselDummyList,
-//                ),
-//                SizedBox(
-//                  height: 20,
-//                ),
-//                RestaurantCarouselDisplay(
-//                  restaurants: carouselDummyList,
-//                ),
+                RestaurantCarouselDisplay(
+                  restaurants: carouselDummyList,
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                RestaurantCarouselDisplay(
+                  restaurants: carouselDummyList,
+                ),
               ],
             ),
           ),
