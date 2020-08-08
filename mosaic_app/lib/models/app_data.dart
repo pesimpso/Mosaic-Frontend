@@ -83,12 +83,17 @@ class AppData extends ChangeNotifier {
     return true;
   }
 
-//  //Logs out the current user if applicable
-//  void logOut() {
-//    //TODO IMPLEMENT
-//  }
+  //Logs out the current user if applicable. Returns true if successful, false otherwise (if user is logged in as guest)
+  bool logOut() {
+    if (getGuest()) {
+      return false;
+    } else {
+      //TODO IMPLEMENT LOGOUT BEHAVIOR HERE
+      return true;
+    }
+  }
 
-  //TODO Delete below
+  //TODO Delete below once networking is implemented
   List<Restaurant> dummyList = [
     Restaurant(
       name: 'Name1',

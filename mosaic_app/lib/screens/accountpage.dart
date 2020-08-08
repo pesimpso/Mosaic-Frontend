@@ -159,8 +159,10 @@ class _AccountPageState extends State<AccountPage> {
                             Icons.input,
                           ),
                           onPressed: () {
-////                            Provider.of<AppData>(context, listen:false).logOut();
-//                            Navigator.pushNamed(context, Login.id);
+                            if (Provider.of<AppData>(context, listen: false)
+                                .logOut()) {
+                              Navigator.pushNamed(context, Login.id);
+                            }
                           },
                         ),
                       ],
