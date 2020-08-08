@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-//import 'package:mosaicapp/models/restaurant.dart';
 import 'package:mosaicapp/widgets/nav_bar.dart';
-//import 'package:mosaicapp/widgets/restaurant_carousel_display.dart';
+import 'package:mosaicapp/widgets/restaurant_carousel_display.dart';
 import 'package:mosaicapp/widgets/restaurant_icon.dart';
 import 'package:mosaicapp/widgets/cafe_icon.dart';
 import 'package:mosaicapp/widgets/pizza_icon.dart';
@@ -9,6 +8,8 @@ import 'package:mosaicapp/widgets/bars_icon.dart';
 import 'package:mosaicapp/widgets/top-rated_icon.dart';
 import 'package:mosaicapp/constants.dart';
 import 'package:mosaicapp/widgets/search_bar.dart';
+
+import 'package:mosaicapp/models/restaurant.dart';
 
 class Homepage extends StatefulWidget {
   static const String id = '/homepage';
@@ -19,16 +20,16 @@ class Homepage extends StatefulWidget {
 
 class _HomepageState extends State<Homepage> {
   //TODO Use provider to pull actual carousel lists
-  // List<Restaurant> carouselDummyList = [
-  //   Restaurant(
-  //       name: 'Name Name Name Name Name Name Name',
-  //       distFromUser: 1.2,
-  //       rating: 3.5),
-  //   Restaurant(name: 'Name', distFromUser: 1.2, rating: 3.5),
-  //   Restaurant(name: 'Name', distFromUser: 1.2, rating: 3.5),
-  //   Restaurant(name: 'test', distFromUser: 1.2, rating: 3.5),
-  //   Restaurant(name: 'test', distFromUser: 1.2, rating: 3.5),
-  // ];
+  List<Restaurant> carouselDummyList = [
+    Restaurant(
+        name: 'Name Name Name Name Name Name Name',
+        distFromUser: 1.2,
+        rating: 3.5),
+    Restaurant(name: 'Name', distFromUser: 1.2, rating: 3.5),
+    Restaurant(name: 'Name', distFromUser: 1.2, rating: 3.5),
+    Restaurant(name: 'test', distFromUser: 1.2, rating: 3.5),
+    Restaurant(name: 'test', distFromUser: 1.2, rating: 3.5),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -80,15 +81,15 @@ class _HomepageState extends State<Homepage> {
                     ),
                   ],
                 ),
-                // RestaurantCarouselDisplay(
-                //   restaurants: carouselDummyList,
-                // ),
-                // SizedBox(
-                //   height: 20,
-                // ),
-                // RestaurantCarouselDisplay(
-                //   restaurants: carouselDummyList,
-                // ),
+//                RestaurantCarouselDisplay(
+//                  restaurants: carouselDummyList,
+//                ),
+//                SizedBox(
+//                  height: 20,
+//                ),
+//                RestaurantCarouselDisplay(
+//                  restaurants: carouselDummyList,
+//                ),
               ],
             ),
           ),
