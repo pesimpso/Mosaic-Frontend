@@ -5,6 +5,7 @@ import 'package:mosaicapp/widgets/heart_icon.dart';
 import 'package:mosaicapp/widgets/nav_bar.dart';
 import 'package:mosaicapp/widgets/caret_icon_dark.dart';
 
+//TODO ENSURE REFACTOREED VERSION STILL HAS OK MARGINS ON OTHER SCREEN SIZES
 class BusinessPage extends StatelessWidget {
   static const String id = '/businesspage';
 
