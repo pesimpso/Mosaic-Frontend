@@ -6,10 +6,10 @@ class HeartIconSmall extends StatelessWidget {
     return MaterialButton(
       child: Icon(
         Icons.favorite_border,
-        size: 30,
+        size: 20,
         color: Colors.black,
       ),
-      minWidth: 30,
+      minWidth: 20,
       onPressed: () {
         //TODO Remove debugPrint and implement functionality
         Navigator.pop(context);

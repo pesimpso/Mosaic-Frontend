@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      initialRoute: Settings.id,
+      initialRoute: Homepage.id,
       //Route String : Function pair
       routes: {
         Login.id: (context) => Login(),
