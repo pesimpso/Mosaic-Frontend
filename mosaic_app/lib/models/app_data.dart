@@ -198,14 +198,19 @@ class AppData extends ChangeNotifier {
 
   QueryReturnData query(Query query) {
     QueryReturnData returnData = QueryReturnData();
+    queryHelp(query, returnData);
+    return returnData;
+  }
+
+  Future queryHelp(Query query, QueryReturnData returnData) async {
     //Handle text-based queries
     if (query.queryType == QueryType.Text) {
       returnData.success = true;
-      returnData.result = _networker.serveQuery(query);
+      returnData.result = await _networker.serveQuery(query);
       //Handle categorical queries
     } else if (query.queryType == QueryType.Category) {
       returnData.success = true;
-      returnData.result = _networker.serveQuery(query);
+      returnData.result = await _networker.serveQuery(query);
       //Handle geospatial queries
     } else if (query.queryType == QueryType.Geospatial) {
       loadUserPosition();
@@ -214,7 +219,7 @@ class AppData extends ChangeNotifier {
         returnData.result = List<Restaurant>();
       } else {
         returnData.success = true;
-        returnData.result = _networker.serveQuery(query);
+        returnData.result = await _networker.serveQuery(query);
       }
     } else {
       return null;

@@ -27,6 +27,9 @@ class _ResultState extends State<Results> {
   @override
   Widget build(BuildContext context) {
     _restaurants = ModalRoute.of(context).settings.arguments;
+    if (_restaurants == null) {
+      _restaurants = List<Restaurant>();
+    }
     constructCards();
     return SafeArea(
       child: Scaffold(
@@ -36,23 +39,23 @@ class _ResultState extends State<Results> {
             NavBar(),
             SearchBar(),
             /* BEGIN FILTERS. NEED TO TURN INTO DROPDOWNS*/
-            Container(
-              margin: EdgeInsets.only(left: 15, right: 15),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  SortDropDown(
-                    type: SortType.Distance,
-                  ),
-                  SortDropDown(
-                    type: SortType.Rating,
-                  ),
-                  SortDropDown(
-                    type: SortType.Sort,
-                  )
-                ],
-              ),
-            ),
+//            Container(
+//              margin: EdgeInsets.only(left: 15, right: 15),
+//              child: Row(
+//                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                children: [
+//                  SortDropDown(
+//                    type: SortType.Distance,
+//                  ),
+//                  SortDropDown(
+//                    type: SortType.Rating,
+//                  ),
+//                  SortDropDown(
+//                    type: SortType.Sort,
+//                  )
+//                ],
+//              ),
+//            ),
             /* NEED TO ADD FUNCTIONALITY. */
             Expanded(
               child: Container(

@@ -45,6 +45,10 @@ class _HomepageState extends State<Homepage> {
       geospatialQueryResult = returnData.result;
     }
 
+    if (geospatialQueryResult == null) {
+      return List<Restaurant>();
+    }
+
     //Once we have the data, divide it up according to whichHalf and send it back
     if (whichHalf == 1) {
       return geospatialQueryResult.sublist(

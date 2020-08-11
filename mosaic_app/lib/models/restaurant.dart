@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
 class Restaurant {
-  int businessID;
   String businessName;
   String businessAddress;
   String businessPhone;
-  //TODO update this to be accurate
+
   String imgURL;
+  NetworkImage image;
 
   //Stores the community rating for the restaurant
   double rating;
@@ -15,9 +15,8 @@ class Restaurant {
   double userRating;
   double distFromUser;
 
-  //Tracks whether the user has favorited the restaurant
-  bool favorited;
-  NetworkImage image;
+  int thumbsUp;
+  int thumbsDown;
 
   //Parameterized constructor
   Restaurant({
@@ -27,14 +26,17 @@ class Restaurant {
     this.businessName,
     this.businessAddress,
     this.businessPhone,
-    this.favorited,
     this.image,
   });
 
   Restaurant.fromJson(Map<String, dynamic> json) {
-    businessID = json['businessID'];
-    businessName = json['businessName'];
-    businessAddress = json['businessAddress'];
-    businessPhone = json['businessPhone'];
+    businessName = json['name'];
+    businessAddress = json['location']['address1'];
+    businessPhone = json['phone'];
+    imgURL = json['image_url'];
+    image = NetworkImage(imgURL);
+    thumbsUp = json['thumbsUp'];
+    thumbsDown = json['thumbsDown'];
+    userRating = thumbsUp / thumbsDown;
   }
 }

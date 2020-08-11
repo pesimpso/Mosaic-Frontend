@@ -2,7 +2,6 @@ import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart' as http;
 import 'package:mosaicapp/models/query.dart';
 import 'dart:convert';
-
 import 'package:mosaicapp/models/restaurant.dart';
 
 class MosaicNetworker {
@@ -46,12 +45,18 @@ class MosaicNetworker {
   }
 
   Future _serveTextQuery(String queryText) async {
+    if (queryText == null || queryText == "") {
+      return List<Restaurant>();
+    }
     var response = await http
         .get(url, headers: {'task': 'textquery', "querytext": queryText});
     return responseToList(response);
   }
 
   Future _serveCategoryQuery(Category category) async {
+    if (category == null) {
+      return List<Restaurant>();
+    }
     String categoryString = category.toString();
     categoryString = categoryString.split(".")[0];
 
@@ -61,6 +66,9 @@ class MosaicNetworker {
   }
 
   Future _serveGeospatialQuery(Position userPosition) async {
+    if (userPosition == null) {
+      return List<Restaurant>();
+    }
     String lat = userPosition.latitude.toString();
     String lng = userPosition.longitude.toString();
 
