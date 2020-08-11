@@ -67,16 +67,14 @@ class _AccountPageState extends State<AccountPage> {
                     thickness: 1,
                   ),
                   Text(
-                    'Username: maryowen',
+                    'Username: ' + Provider.of<AppData>(context).username !=
+                            null
+                        ? Provider.of<AppData>(context).username
+                        : "NOT LOGGED IN",
                     style: kBodyStyleDark,
                     textAlign: TextAlign.center,
                   ),
                   SizedBox(height: 5),
-                  Text(
-                    'Password: password',
-                    style: kBodyStyleDark,
-                    textAlign: TextAlign.center,
-                  ),
                   Divider(
                     color: Colors.black,
                     thickness: 1,
@@ -84,7 +82,7 @@ class _AccountPageState extends State<AccountPage> {
                   Row(
                     children: [
                       Container(
-                        child: HeartIcon(),
+                        //child: HeartIcon(),
                         width: 60,
                       ),
                       Text(

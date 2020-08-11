@@ -1,3 +1,6 @@
+import 'dart:collection';
+import 'dart:core';
+
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:mosaicapp/models/login_register_data.dart';
@@ -12,6 +15,9 @@ class AppData extends ChangeNotifier {
   bool _guest;
   UserLocator _locator;
   bool _registerValid;
+  LinkedHashMap<String, List> usernameFavoritesMap =
+      LinkedHashMap<String, List>();
+
   //TODO sub-in real URL
   static String dummyURL = "";
   static MosaicNetworker _networker = MosaicNetworker(url: dummyURL);
@@ -20,6 +26,35 @@ class AppData extends ChangeNotifier {
   AppData({bool guest}) {
     this._guest = guest;
     this._locator = UserLocator();
+  }
+
+  bool ToggleFavorite(Restaurant toFavorite) {
+    if (username == null) {
+      return false;
+    }
+    if (!usernameFavoritesMap.containsKey(username)) {
+      usernameFavoritesMap.putIfAbsent(username, () => List<Restaurant>());
+      usernameFavoritesMap[username].add(toFavorite);
+    } else {
+      List<Restaurant> list = usernameFavoritesMap[username];
+      if (list.contains(toFavorite)) {
+        list.remove(toFavorite);
+      } else {
+        list.add(toFavorite);
+      }
+    }
+  }
+
+  bool isFavorite(Restaurant restaurant) {
+    if (username == null) {
+      return false;
+    }
+    if (usernameFavoritesMap.containsKey(username)) {
+      List<Restaurant> list = usernameFavoritesMap[username];
+      return list.contains(restaurant);
+    } else {
+      return false;
+    }
   }
 
   void setGuest(bool newGuestVal) {

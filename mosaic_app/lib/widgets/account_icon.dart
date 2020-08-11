@@ -14,9 +14,7 @@ class AccountIcon extends StatelessWidget {
       ),
       minWidth: 40,
       onPressed: () {
-        //TODO Remove debugPrint and implement functionality
         Navigator.pushNamed(context, '/accountpage');
-        debugPrint("Pressed Account Button");
       },
     );
   }
