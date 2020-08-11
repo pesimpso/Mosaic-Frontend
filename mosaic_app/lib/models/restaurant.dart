@@ -1,31 +1,40 @@
 import 'package:flutter/material.dart';
 
 class Restaurant {
-  double distFromUser;
+  int businessID;
+  String businessName;
+  String businessAddress;
+  String businessPhone;
+  //TODO update this to be accurate
+  String imgURL;
 
   //Stores the community rating for the restaurant
   double rating;
 
   //Stores the user's rating of the restaurant if it exists
   double userRating;
-
-  String name;
-  String address;
-  String phone;
+  double distFromUser;
 
   //Tracks whether the user has favorited the restaurant
   bool favorited;
-  AssetImage image;
+  NetworkImage image;
 
   //Parameterized constructor
   Restaurant({
     this.distFromUser,
     this.rating,
     this.userRating,
-    this.name,
-    this.address,
-    this.phone,
+    this.businessName,
+    this.businessAddress,
+    this.businessPhone,
     this.favorited,
     this.image,
   });
+
+  Restaurant.fromJson(Map<String, dynamic> json) {
+    businessID = json['businessID'];
+    businessName = json['businessName'];
+    businessAddress = json['businessAddress'];
+    businessPhone = json['businessPhone'];
+  }
 }

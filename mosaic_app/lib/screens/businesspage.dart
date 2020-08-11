@@ -54,9 +54,9 @@ class BusinessPage extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
                               Text(
-                                (restaurant.name == null)
+                                (restaurant.businessName == null)
                                     ? ""
-                                    : restaurant.name,
+                                    : restaurant.businessName,
                                 style: kHeaderStyle,
                               ),
                               HeartIcon(),
@@ -68,7 +68,7 @@ class BusinessPage extends StatelessWidget {
                           style: kBodyStyleDark,
                         ),
                         Text(
-                          restaurant.phone,
+                          restaurant.businessPhone,
                           style: kBodyStyleDark,
                         ),
                         Text(

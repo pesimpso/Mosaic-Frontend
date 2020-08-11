@@ -19,7 +19,6 @@ void main() {
 /*TODOs:
 * TODO: Prevent user from swiping left to pop Navigator and access older screens that should be inaccessible
 * TODO: Fix off-positioned elements on a few screens (results, businesspage)
-* TODO: Implement networker and associated JSON decoder
 * TODO: Create a data management system for user-favorited restaurant tracking
 * TODO: Integrate favorites ListView in accountpage screen with Provider favorites list
 * TODO: Implement filter functionality with restaurant data on results screen

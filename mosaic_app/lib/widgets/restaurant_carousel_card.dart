@@ -38,7 +38,7 @@ class RestaurantCarouselCard extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  restaurant.name,
+                  restaurant.businessName,
                   maxLines: 1,
                   style: kBodyStyleDark.copyWith(
                     fontSize: 18,

@@ -38,7 +38,7 @@ class RestaurantResultCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        restaurant.name,
+                        restaurant.businessName,
                         style: kHeaderStyle,
                       ),
                       Text(
@@ -47,13 +47,17 @@ class RestaurantResultCard extends StatelessWidget {
                         style: kBodyStyleDark,
                       ),
                       Text(
-                        (restaurant.phone == null) ? "" : restaurant.phone,
+                        (restaurant.businessPhone == null)
+                            ? ""
+                            : restaurant.businessPhone,
                         style: kBodyStyleDark.copyWith(
                           color: Colors.blue,
                         ),
                       ),
                       Text(
-                        (restaurant.address == null) ? "" : restaurant.address,
+                        (restaurant.businessAddress == null)
+                            ? ""
+                            : restaurant.businessAddress,
                         style: kBodyStyleDark,
                       )
                     ],
