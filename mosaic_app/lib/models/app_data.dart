@@ -4,12 +4,18 @@ import 'package:mosaicapp/models/login_register_data.dart';
 import 'package:mosaicapp/models/query.dart';
 import 'package:mosaicapp/models/query_return_data.dart';
 import 'package:mosaicapp/models/restaurant.dart';
+import 'package:mosaicapp/services/Networker.dart';
 import 'package:mosaicapp/services/user_locator.dart';
 
 //Data-only class used by provider to share and manipulate data across the app
 class AppData extends ChangeNotifier {
   bool _guest;
   UserLocator _locator;
+  bool _registerValid;
+  //TODO sub-in real URL
+  static String dummyURL = "";
+  static MosaicNetworker _networker = MosaicNetworker(url: dummyURL);
+  String username = null;
 
   AppData({bool guest}) {
     this._guest = guest;
@@ -44,43 +50,53 @@ class AppData extends ChangeNotifier {
   }
 
   bool validateLogin(LoginRegisterData data) {
+    validateLoginHelp(data);
+    return username != null;
+  }
+
+  void validateLoginHelp(LoginRegisterData data) async {
     if (data == null) {
-      return false;
+      return;
     }
     if (data.username == null ||
         data.username == "" ||
         data.password == null ||
         data.password == "") {
-      return false;
+      return;
     }
     bool isValid = true;
 
-    //TODO IMPLEMENT SERVER VALIDATION HERE
+    isValid = await _networker.validateLogin(data.username, data.password);
 
     if (isValid) {
       setGuest(false);
     }
-    return true;
+    this.username = data.username;
   }
 
   bool validateRegistration(LoginRegisterData data) {
+    validateRegistrationHelp(data);
+    return _registerValid;
+  }
+
+  void validateRegistrationHelp(LoginRegisterData data) async {
     if (data == null) {
-      return false;
+      _registerValid = false;
     }
     if (data.username == null ||
         data.username == "" ||
         data.password == null ||
         data.password == "") {
-      return false;
+      _registerValid = false;
     }
     bool isValid = true;
 
-    //TODO IMPLEMENT SERVER VALIDATION HERE
+    isValid = await _networker.registerUser(data.username, data.password);
 
     if (isValid) {
       setGuest(false);
     }
-    return true;
+    _registerValid = true;
   }
 
   //Logs out the current user if applicable. Returns true if successful, false otherwise (if user is logged in as guest)
@@ -88,7 +104,7 @@ class AppData extends ChangeNotifier {
     if (getGuest()) {
       return false;
     } else {
-      //TODO IMPLEMENT LOGOUT BEHAVIOR HERE
+      username = null;
       return true;
     }
   }
@@ -145,16 +161,12 @@ class AppData extends ChangeNotifier {
     QueryReturnData returnData = QueryReturnData();
     //Handle text-based queries
     if (query.queryType == QueryType.Text) {
-      //TODO implement query behavior, return a list of restaurants
-      //TODO delete hardcoded results
       returnData.success = true;
-      returnData.result = dummyList;
+      returnData.result = _networker.serveQuery(query);
       //Handle categorical queries
     } else if (query.queryType == QueryType.Category) {
-      //TODO implement query behavior, return a list of restaurants
-      //TODO delete hardcoded results
       returnData.success = true;
-      returnData.result = dummyList;
+      returnData.result = _networker.serveQuery(query);
       //Handle geospatial queries
     } else if (query.queryType == QueryType.Geospatial) {
       loadUserPosition();
@@ -162,10 +174,8 @@ class AppData extends ChangeNotifier {
         returnData.success = false;
         returnData.result = List<Restaurant>();
       } else {
-        //TODO implement query behavior, return a list of restaurants
-        //TODO delete hardcoded results
         returnData.success = true;
-        returnData.result = dummyList;
+        returnData.result = _networker.serveQuery(query);
       }
     } else {
       return null;

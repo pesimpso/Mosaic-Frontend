@@ -5,10 +5,10 @@ import 'dart:convert';
 
 import 'package:mosaicapp/models/restaurant.dart';
 
-class NetworkHelper {
+class MosaicNetworker {
   final String url;
 
-  NetworkHelper({this.url});
+  MosaicNetworker({this.url});
 
   Future validateLogin(String username, String pw) async {
     var response = await http.post(url,
@@ -31,27 +31,27 @@ class NetworkHelper {
   dynamic serveQuery(Query query) {
     //Handle text-based queries
     if (query.queryType == QueryType.Text) {
-      return serveTextQuery(query.queryText);
+      return _serveTextQuery(query.queryText);
     }
     //Handle categorical queries
     else if (query.queryType == QueryType.Category) {
-      return serveCategoryQuery(query.queryCategory);
+      return _serveCategoryQuery(query.queryCategory);
     }
     //Handle geospatial queries
     else if (query.queryType == QueryType.Geospatial) {
-      serveGeospatialQuery(query.userPosition);
+      _serveGeospatialQuery(query.userPosition);
     } else {
       return null;
     }
   }
 
-  Future serveTextQuery(String queryText) async {
+  Future _serveTextQuery(String queryText) async {
     var response = await http
         .get(url, headers: {'task': 'textquery', "querytext": queryText});
     return responseToList(response);
   }
 
-  Future serveCategoryQuery(Category category) async {
+  Future _serveCategoryQuery(Category category) async {
     String categoryString = category.toString();
     categoryString = categoryString.split(".")[0];
 
@@ -60,7 +60,7 @@ class NetworkHelper {
     return responseToList(response);
   }
 
-  Future serveGeospatialQuery(Position userPosition) async {
+  Future _serveGeospatialQuery(Position userPosition) async {
     String lat = userPosition.latitude.toString();
     String lng = userPosition.longitude.toString();
 
