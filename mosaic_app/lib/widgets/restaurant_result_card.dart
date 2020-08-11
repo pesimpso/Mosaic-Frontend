@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:mosaicapp/models/restaurant.dart';
 import 'package:mosaicapp/screens/businesspage.dart';
 import 'package:mosaicapp/widgets/heart_icon.dart';
-import 'package:mosaicapp/widgets/heart_icon_small.dart';
 import 'package:mosaicapp/widgets/star_display.dart';
 
 import '../constants.dart';
@@ -69,7 +68,8 @@ class RestaurantResultCard extends StatelessWidget {
                         rating: restaurant.rating,
                         height: 23,
                       ),
-                      HeartIconSmall(
+                      HeartIcon(
+                        associatedRestaurant: restaurant,
                         size: 30,
                       ),
                     ],

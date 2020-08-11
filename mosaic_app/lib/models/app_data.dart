@@ -43,6 +43,8 @@ class AppData extends ChangeNotifier {
         list.add(toFavorite);
       }
     }
+    notifyListeners();
+    return true;
   }
 
   bool isFavorite(Restaurant restaurant) {
@@ -140,6 +142,8 @@ class AppData extends ChangeNotifier {
       return false;
     } else {
       username = null;
+      LinkedHashMap<String, List> usernameFavoritesMap =
+          LinkedHashMap<String, List>();
       return true;
     }
   }

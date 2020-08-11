@@ -59,7 +59,7 @@ class BusinessPage extends StatelessWidget {
                                     : restaurant.businessName,
                                 style: kHeaderStyle,
                               ),
-                              HeartIcon(restaurant),
+                              HeartIcon(associatedRestaurant: restaurant),
                             ],
                           ),
                         ),

@@ -5,19 +5,20 @@ import 'package:mosaicapp/models/restaurant.dart';
 import 'package:provider/provider.dart';
 
 class HeartIcon extends StatelessWidget {
-  Restaurant associatedRestaurant;
-  HeartIcon({@required this.associatedRestaurant});
+  final double size;
+  final Restaurant associatedRestaurant;
+  HeartIcon({@required this.associatedRestaurant, this.size = kIconSize});
   @override
   Widget build(BuildContext context) {
     return MaterialButton(
       child: Icon(
         Icons.favorite_border,
-        size: kIconSize,
+        size: size,
         color: Provider.of<AppData>(context).isFavorite(associatedRestaurant)
             ? Colors.redAccent
             : Colors.black,
       ),
-      minWidth: 40,
+      minWidth: size,
       onPressed: () {
         Provider.of<AppData>(context, listen: false)
             .ToggleFavorite(associatedRestaurant);
