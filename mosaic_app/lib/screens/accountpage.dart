@@ -1,5 +1,9 @@
+import 'dart:collection';
+
 import 'package:flutter/material.dart';
 import 'package:mosaicapp/constants.dart';
+import 'package:mosaicapp/models/restaurant.dart';
+import 'package:mosaicapp/screens/businesspage.dart';
 import 'package:provider/provider.dart';
 import 'package:mosaicapp/models/app_data.dart';
 import 'package:mosaicapp/widgets/caret_icon.dart';
@@ -15,9 +19,25 @@ class AccountPage extends StatefulWidget {
 }
 
 class _AccountPageState extends State<AccountPage> {
-  final List<String> data = ['name', 'name', 'name'];
+  List<Restaurant> favs = List<Restaurant>();
+
+  void populateFavs() {
+    String username = Provider.of<AppData>(context).username;
+    LinkedHashMap<String, List<dynamic>> favsMap =
+        Provider.of<AppData>(context).usernameFavoritesMap;
+    if (username == null) {
+      return;
+    }
+    if (favsMap.containsKey(username)) {
+      if (favsMap[username] != null) {
+        favs = favsMap[username];
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    populateFavs();
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.black,
@@ -67,10 +87,10 @@ class _AccountPageState extends State<AccountPage> {
                     thickness: 1,
                   ),
                   Text(
-                    'Username: ' + Provider.of<AppData>(context).username !=
-                            null
-                        ? Provider.of<AppData>(context).username
-                        : "NOT LOGGED IN",
+                    'Username: ' +
+                        (Provider.of<AppData>(context).username != null
+                            ? Provider.of<AppData>(context).username
+                            : "NOT LOGGED IN"),
                     style: kBodyStyleDark,
                     textAlign: TextAlign.center,
                   ),
@@ -101,13 +121,14 @@ class _AccountPageState extends State<AccountPage> {
                   Container(
                     height: 270,
                     child: ListView.separated(
-                      itemCount: data.length,
-                      itemBuilder: (BuildContext context, int index) {
+                      itemCount: favs.length,
+                      itemBuilder: (BuildContext context, int idx) {
                         return Card(
                           child: InkWell(
+                            splashColor: Colors.black,
                             onTap: () {
-                              //TODO Delete debugPrint and implement functionality
-                              debugPrint("Restaurant button pressed");
+                              Navigator.pushNamed(context, BusinessPage.id,
+                                  arguments: favs[idx]);
                             },
                             child: Row(
                               children: <Widget>[
@@ -115,11 +136,10 @@ class _AccountPageState extends State<AccountPage> {
                                   height: 40,
                                   width: 40,
                                   margin: EdgeInsets.all(5),
-                                  child: Image.asset(
-                                      'assets/images/gray_square.png'),
+                                  child: Image.network(favs[idx].imgURL),
                                 ),
                                 Text(
-                                  'Name\n',
+                                  favs[idx].businessName,
                                   style: kBodyStyle,
                                   textAlign: TextAlign.left,
                                 ),
