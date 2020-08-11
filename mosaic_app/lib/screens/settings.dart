@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mosaicapp/constants.dart';
 import 'package:mosaicapp/widgets/caret_icon.dart';
+import 'package:popup_box/popup_box.dart';
 
 class Settings extends StatefulWidget {
   static const String id = '/settings';
@@ -89,21 +90,19 @@ class _SettingsState extends State<Settings> {
                     width: 150,
                     height: 30,
                     child: RaisedButton(
-                      child: Text(
-                        'Edit password',
-                        style: kBodyStyle,
-                      ),
-                      color: Colors.black,
-                      clipBehavior: Clip.hardEdge,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      /* NEED TO ADD FUNCTIONALITY */
-                      onPressed: () {
-                        //TODO Delete debugPrint and implement functionality
-                        debugPrint("Edit password button pressed");
-                      },
-                    ),
+                        child: Text(
+                          'Edit password',
+                          style: kBodyStyle,
+                        ),
+                        color: Colors.black,
+                        clipBehavior: Clip.hardEdge,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        /* NEED TO ADD FUNCTIONALITY */
+                        onPressed: () {
+                          debugPrint("Edit Password button pressed.");
+                        }),
                   ),
                   SizedBox(height: 2),
                   Divider(
@@ -140,9 +139,37 @@ class _SettingsState extends State<Settings> {
                         borderRadius: BorderRadius.circular(20),
                       ),
                       /* NEED TO ADD FUNCTIONALITY */
-                      onPressed: () {
-                        //TODO Delete debugPrint and implement functionality
-                        debugPrint("Terms of Use button pressed");
+                      onPressed: () async {
+                        await PopupBox.showPopupBox(
+                            context: context,
+                            button: MaterialButton(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              color: Colors.black,
+                              child: Text(
+                                'Exit',
+                                style: kBodyStyle,
+                              ),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                            willDisplayWidget: Column(
+                              children: <Widget>[
+                                Text(
+                                  'Last updated: 08/11/2020\n\n'
+                                  'Thank you for using Mosaic.\n'
+                                  'By using our app, you agree that\n'
+                                  'we are not to be held responsible\n'
+                                  'for any issues on your part.',
+                                  style: kBodyStyleDark,
+                                ),
+                                SizedBox(
+                                  height: 30,
+                                )
+                              ],
+                            ));
                       },
                     ),
                   ),
@@ -161,9 +188,39 @@ class _SettingsState extends State<Settings> {
                         borderRadius: BorderRadius.circular(20),
                       ),
                       /* NEED TO ADD FUNCTIONALITY */
-                      onPressed: () {
-                        //TODO Delete debugPrint and implement functionality
-                        debugPrint("Data Policy button pressed");
+                      onPressed: () async {
+                        await PopupBox.showPopupBox(
+                            context: context,
+                            button: MaterialButton(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              color: Colors.black,
+                              child: Text(
+                                'Exit',
+                                style: kBodyStyle,
+                              ),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                            willDisplayWidget: Column(
+                              children: <Widget>[
+                                Text(
+                                  'Last updated: 08/11/2020\n\n'
+                                  'Thank you for using Mosaic.\n'
+                                  'This app is a student project,\n'
+                                  'and as such we do not have any\n'
+                                  'advanced security measures in place.\n'
+                                  'Considering that we do store your data,\n'
+                                  'Sign up at your own risk.',
+                                  style: kBodyStyleDark,
+                                ),
+                                SizedBox(
+                                  height: 30,
+                                )
+                              ],
+                            ));
                       },
                     ),
                   ),
