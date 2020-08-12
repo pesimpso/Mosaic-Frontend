@@ -99,17 +99,16 @@ class _AccountPageState extends State<AccountPage> {
                     color: Colors.black,
                     thickness: 1,
                   ),
-                  Row(
-                    children: [
-                      Container(
-                        //child: HeartIcon(),
-                        width: 60,
-                      ),
-                      Text(
-                        'Favorites',
-                        style: kHeaderStyle,
-                      ),
-                    ],
+                  Padding(
+                    padding: EdgeInsets.only(left: 15),
+                    child: Row(
+                      children: [
+                        Text(
+                          'Favorites',
+                          style: kHeaderStyle,
+                        ),
+                      ],
+                    ),
                   ),
                   Divider(
                     color: Colors.black,
