@@ -80,6 +80,7 @@ class RestaurantResultCard extends StatelessWidget {
                 restaurant.imgURL,
                 width: 150,
                 height: 150,
+                fit: BoxFit.cover,
               )
             ],
           )),

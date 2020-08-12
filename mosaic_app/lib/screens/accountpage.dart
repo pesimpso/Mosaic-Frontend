@@ -135,7 +135,12 @@ class _AccountPageState extends State<AccountPage> {
                                   height: 40,
                                   width: 40,
                                   margin: EdgeInsets.all(5),
-                                  child: Image.network(favs[idx].imgURL),
+                                  child: Image.network(
+                                    favs[idx].imgURL,
+                                    height: 40,
+                                    width: 40,
+                                    fit: BoxFit.cover,
+                                  ),
                                 ),
                                 Text(
                                   favs[idx].businessName,

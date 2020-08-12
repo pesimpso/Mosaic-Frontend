@@ -123,9 +123,13 @@ class MosaicNetworker {
     List<Restaurant> list = List<Restaurant>();
     if (response.statusCode == 200) {
       String data = response.body;
-      dynamic json = jsonDecode(data);
-      for (Map i in json) {
-        list.add(Restaurant.fromJson(i));
+      if (data == null || data == "") {
+        return list;
+      } else {
+        dynamic json = jsonDecode(data);
+        for (Map i in json) {
+          list.add(Restaurant.fromJson(i));
+        }
       }
     }
     return list;

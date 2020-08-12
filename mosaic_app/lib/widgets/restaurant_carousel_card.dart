@@ -29,11 +29,13 @@ class RestaurantCarouselCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Expanded(
-                    child: Image.network(
-                  restaurant.imgURL,
-                  height: 150,
-                  width: 150,
-                )),
+                  child: Image.network(
+                    restaurant.imgURL,
+                    height: 150,
+                    width: 150,
+                    fit: BoxFit.cover,
+                  ),
+                ),
                 Text(
                   restaurant.businessName,
                   maxLines: 1,
