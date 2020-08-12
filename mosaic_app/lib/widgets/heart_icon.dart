@@ -11,6 +11,8 @@ class HeartIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialButton(
+      splashColor: Colors.white,
+      highlightColor: Colors.white,
       child: Icon(
         Icons.favorite_border,
         size: size,

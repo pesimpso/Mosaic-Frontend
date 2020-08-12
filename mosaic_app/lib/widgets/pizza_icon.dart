@@ -17,7 +17,7 @@ class PizzaIcon extends CategoryIconAncestor {
             color: Colors.white,
           ),
           Text(
-            'Pizza',
+            'Fun',
             style: kSmallLabelStyle,
           ),
         ],

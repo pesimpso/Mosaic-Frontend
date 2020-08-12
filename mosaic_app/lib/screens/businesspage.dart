@@ -41,23 +41,26 @@ class BusinessPage extends StatelessWidget {
                         ),
                         Container(
                           alignment: Alignment.topRight,
-                          decoration: new BoxDecoration(
-                            color: Colors.grey,
-                            borderRadius: BorderRadius.circular(5),
+                          child: Image.network(
+                            restaurant.imgURL,
+                            height: 330,
+                            width: 330,
                           ),
-                          height: 250,
-                          width: 330,
                         ),
                         Container(
                           width: 360,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
-                              Text(
-                                (restaurant.businessName == null)
-                                    ? ""
-                                    : restaurant.businessName,
-                                style: kHeaderStyle,
+                              Flexible(
+                                child: Container(
+                                  child: Text(
+                                    (restaurant.businessName == null)
+                                        ? ""
+                                        : restaurant.businessName,
+                                    style: kHeaderStyle,
+                                  ),
+                                ),
                               ),
                               HeartIcon(associatedRestaurant: restaurant),
                             ],
@@ -72,7 +75,7 @@ class BusinessPage extends StatelessWidget {
                           style: kBodyStyleDark,
                         ),
                         Text(
-                          '123 Address St.\nLos Angeles, CA 90089',
+                          restaurant.businessAddress,
                           style: kBodyStyleDark,
                         ),
                       ]),

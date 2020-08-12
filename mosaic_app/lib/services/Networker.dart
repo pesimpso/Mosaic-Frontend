@@ -17,8 +17,11 @@ class MosaicNetworker {
         .get(url + '?task=login&username=' + username + '&password=' + pw);
 
     String data = response.body;
-    dynamic json = jsonDecode(data);
-    return json['result'];
+    if (data == "true") {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   Future registerUser(String username, String pw) async {
@@ -28,8 +31,11 @@ class MosaicNetworker {
         .get(url + '?task=register&username=' + username + '&password=' + pw);
 
     String data = response.body;
-    dynamic json = jsonDecode(data);
-    return json['result'];
+    if (data == "true") {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   Future<List<Restaurant>> serveQuery(Query query) async {
@@ -58,6 +64,17 @@ class MosaicNetworker {
     return responseToList(response);
   }
 
+  void rate(Restaurant rest, double rating) {
+    if (rest == null) {
+      return;
+    }
+    http.get(url +
+        '?task=addrating&rating=' +
+        rating.toString() +
+        "&business=" +
+        rest.businessName);
+  }
+
   Future _serveCategoryQuery(Category category, List<Restaurant> result) async {
     if (category == null) {
       return List<Restaurant>();
@@ -71,26 +88,35 @@ class MosaicNetworker {
   }
 
   int categoryToInt(Category category) {
-    //TODO IMPLEMENT ACTUAL CONVERSION HERE
-    return 2;
+    if (category.toString() == "Category.Food") {
+      return 8; //Food
+    } else if (category.toString() == "Category.Cafes") {
+      return 2; //Coffee
+    } else if (category.toString() == "Category.Pizza") {
+      return 11; //Comfort
+    } else if (category.toString() == "Category.Bars") {
+      return 9;
+    } else if (category.toString() == "Category.Top") {
+      return 10;
+    }
+    return 1;
   }
 
-  Future _serveGeospatialQuery(
+  Future<List<Restaurant>> _serveGeospatialQuery(
       Position userPosition, List<Restaurant> result) async {
     if (userPosition == null) {
       return List<Restaurant>();
     }
     String lat = userPosition.latitude.toString();
     String lng = userPosition.longitude.toString();
-
-    var response = await http.post(url,
-        body: json.encode({'task': 'geoquery', 'lat': lat, 'lng': lng}));
-    List<Restaurant> rests = responseToList(response);
-    print('here');
-    for (Restaurant rest in rests) {
-      print(rest.businessName);
+    var response =
+        await http.get(url + '?task=geoquery&lat=' + lat + '&lng=' + lng);
+    if (response.statusCode == 200) {
+      List<Restaurant> rests = responseToList(response);
+      return rests;
+    } else {
+      return List<Restaurant>();
     }
-    return rests;
   }
 
   static dynamic responseToList(var response) {

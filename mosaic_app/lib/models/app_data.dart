@@ -1,5 +1,6 @@
 import 'dart:collection';
 import 'dart:core';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
@@ -12,7 +13,7 @@ import 'package:mosaicapp/services/user_locator.dart';
 
 //Data-only class used by provider to share and manipulate data across the app
 class AppData extends ChangeNotifier {
-  bool _guest;
+  bool _guest = false;
   UserLocator _locator;
   bool _registerValid;
   LinkedHashMap<String, List> usernameFavoritesMap =
@@ -21,8 +22,7 @@ class AppData extends ChangeNotifier {
   static MosaicNetworker _networker = MosaicNetworker();
   String username = null;
 
-  AppData({bool guest}) {
-    this._guest = guest;
+  AppData() {
     this._locator = UserLocator();
   }
 
@@ -70,12 +70,12 @@ class AppData extends ChangeNotifier {
     _locator = locator;
   }
 
-  Position getUserLocation() {
+  Future<Position> getUserLocation() async {
     if (_locator == null) {
       return null;
     }
 
-    return _locator.position;
+    return await _locator.getUserPosition();
   }
 
   void refreshUserLocation() {
@@ -84,8 +84,8 @@ class AppData extends ChangeNotifier {
     }
   }
 
-  bool validateLogin(LoginRegisterData data) {
-    validateLoginHelp(data);
+  Future<bool> validateLogin(LoginRegisterData data) async {
+    await validateLoginHelp(data);
     return username != null;
   }
 
@@ -109,8 +109,8 @@ class AppData extends ChangeNotifier {
     this.username = data.username;
   }
 
-  bool validateRegistration(LoginRegisterData data) {
-    validateRegistrationHelp(data);
+  Future<bool> validateRegistration(LoginRegisterData data) async {
+    await validateRegistrationHelp(data);
     return _registerValid;
   }
 
@@ -131,13 +131,15 @@ class AppData extends ChangeNotifier {
     if (isValid) {
       setGuest(false);
     }
+
+    this.username = data.username;
     _registerValid = true;
   }
 
   //Logs out the current user if applicable. Returns true if successful, false otherwise (if user is logged in as guest)
   bool logOut() {
     if (getGuest()) {
-      return false;
+      return true;
     } else {
       username = null;
       LinkedHashMap<String, List> usernameFavoritesMap =
@@ -154,44 +156,15 @@ class AppData extends ChangeNotifier {
     }
   }
 
-  //TODO Delete below once networking is implemented
-  List<Restaurant> dummyList = [
-    Restaurant(
-      businessName: 'Name1',
-      distFromUser: 1.2,
-      rating: 3.5,
-      businessPhone: "(123) 456-7890",
-      businessAddress: "123 Road St.",
-    ),
-    Restaurant(
-      businessName: 'Name2',
-      distFromUser: 1.2,
-      rating: 3.5,
-      businessPhone: "(123) 456-7890",
-      businessAddress: "123 Road St.",
-    ),
-    Restaurant(
-      businessName: 'Name3',
-      distFromUser: 1.2,
-      rating: 3.5,
-      businessPhone: "(123) 456-7890",
-      businessAddress: "123 Road St.",
-    ),
-    Restaurant(
-      businessName: 'Name4',
-      distFromUser: 1.2,
-      rating: 3.5,
-      businessPhone: "(123) 456-7890",
-      businessAddress: "123 Road St.",
-    ),
-    Restaurant(
-      businessName: 'Name5',
-      distFromUser: 1.2,
-      rating: 3.5,
-      businessPhone: "(123) 456-7890",
-      businessAddress: "123 Road St.",
-    ),
-  ];
+  bool rate(Restaurant associatedRestaurant, int rating) {
+    if (username != null && associatedRestaurant != null) {
+      associatedRestaurant.userRating = rating.toDouble();
+      _networker.rate(associatedRestaurant, rating.toDouble());
+      return true;
+    } else {
+      return false;
+    }
+  }
 
   Future<Position> loadUserPosition() async {
     if (_locator == null) {
@@ -205,7 +178,25 @@ class AppData extends ChangeNotifier {
   Future<QueryReturnData> query(Query query) async {
     QueryReturnData returnData = QueryReturnData();
     await queryHelp(query, returnData);
+    Position userPos = await getUserLocation();
+    for (Restaurant rest in returnData.result) {
+      rest.distFromUser = calculateDistance(
+          rest.lat, rest.lng, userPos.latitude, userPos.longitude);
+      String dubString = rest.distFromUser.toString();
+      int dotIdx = dubString.indexOf(".");
+      dubString = dubString.substring(0, dotIdx + 2);
+      rest.distFromUser = double.parse(dubString);
+    }
     return returnData;
+  }
+
+  static double calculateDistance(lat1, lon1, lat2, lon2) {
+    var p = 0.017453292519943295;
+    var c = cos;
+    var a = 0.5 -
+        c((lat2 - lat1) * p) / 2 +
+        c(lat1 * p) * c(lat2 * p) * (1 - c((lon2 - lon1) * p)) / 2;
+    return 12742 * asin(sqrt(a));
   }
 
   Future queryHelp(Query query, QueryReturnData returnData) async {

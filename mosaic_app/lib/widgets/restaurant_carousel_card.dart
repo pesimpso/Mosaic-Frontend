@@ -29,14 +29,11 @@ class RestaurantCarouselCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Expanded(
-                  child: Container(
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(5)),
-                        color: Colors.grey),
-                    height: 150,
-                    width: double.infinity,
-                  ),
-                ),
+                    child: Image.network(
+                  restaurant.imgURL,
+                  height: 150,
+                  width: 150,
+                )),
                 Text(
                   restaurant.businessName,
                   maxLines: 1,
@@ -51,7 +48,7 @@ class RestaurantCarouselCard extends StatelessWidget {
                   style: kBodyStyleDark,
                 ),
                 StarDisplay(
-                  rating: restaurant.rating,
+                  associatedRestaurant: restaurant,
                 ),
               ],
             ),

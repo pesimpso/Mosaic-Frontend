@@ -328,31 +328,31 @@ class _SettingsState extends State<Settings> {
                   ),
                   SizedBox(height: 200),
                   /* BEGIN DELETE ACCOUNT BUTTON */
-                  SizedBox(
-                    width: 250,
-                    height: 50,
-                    child: RaisedButton(
-                      child: Text(
-                        'Delete Account',
-                        maxLines: 1,
-                        style: TextStyle(
-                          fontSize: 24,
-                          color: Colors.white,
-                          fontFamily: 'Josefin Sans:wght500',
-                        ),
-                      ),
-                      color: Colors.black,
-                      clipBehavior: Clip.hardEdge,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(45),
-                      ),
-                      /* NEED TO ADD FUNCTIONALITY */
-                      onPressed: () {
-                        //TODO Delete debugPrint and implement functionality
-                        debugPrint("Delete Account button pressed");
-                      },
-                    ),
-                  ),
+//                  SizedBox(
+//                    width: 250,
+//                    height: 50,
+//                    child: RaisedButton(
+//                      child: Text(
+//                        'Delete Account',
+//                        maxLines: 1,
+//                        style: TextStyle(
+//                          fontSize: 24,
+//                          color: Colors.white,
+//                          fontFamily: 'Josefin Sans:wght500',
+//                        ),
+//                      ),
+//                      color: Colors.black,
+//                      clipBehavior: Clip.hardEdge,
+//                      shape: RoundedRectangleBorder(
+//                        borderRadius: BorderRadius.circular(45),
+//                      ),
+//                      /* NEED TO ADD FUNCTIONALITY */
+//                      onPressed: () {
+//
+//                        debugPrint("Delete Account button pressed");
+//                      },
+//                    ),
+//                  ),
                 ],
               ),
             ),

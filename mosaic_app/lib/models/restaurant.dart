@@ -9,19 +9,17 @@ class Restaurant {
   NetworkImage _image;
 
   //Stores the community rating for the restaurant
-  double rating;
+  double userRating;
 
   //Stores the user's rating of the restaurant if it exists
-  double userRating;
   double distFromUser;
 
-  int thumbsUp;
-  int thumbsDown;
+  double lat;
+  double lng;
 
   //Parameterized constructor
   Restaurant({
     this.distFromUser,
-    this.rating,
     this.userRating,
     this.businessName,
     this.businessAddress,
@@ -34,8 +32,8 @@ class Restaurant {
     businessAddress = json['location']['address1'];
     businessPhone = json['phone'];
     imgURL = json['image_url'];
-    thumbsUp = json['thumbsUp'];
-    thumbsDown = json['thumbsDown'];
-    userRating = thumbsUp / thumbsDown;
+    lat = json['latitude'];
+    lng = json['longitude'];
+    userRating = json['rating'];
   }
 }

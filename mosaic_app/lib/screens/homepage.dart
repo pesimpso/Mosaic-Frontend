@@ -33,7 +33,7 @@ class _HomepageState extends State<Homepage> {
     QueryReturnData returnData =
         await Provider.of<AppData>(context, listen: false).query(Query(
             queryType: QueryType.Geospatial,
-            userPosition: Provider.of<AppData>(context, listen: false)
+            userPosition: await Provider.of<AppData>(context, listen: false)
                 .getUserLocation()));
     //If the query fails, return an empty list
     if (returnData.success == false) {
@@ -54,10 +54,6 @@ class _HomepageState extends State<Homepage> {
       return List<Restaurant>();
     }
 
-    print('toPrint');
-    for (Restaurant rest in geospatialQueryResult) {
-      print(rest.businessName);
-    }
     //Once we have the data, divide it up according to whichHalf and send it back
     if (whichHalf == 1) {
       return geospatialQueryResult.sublist(

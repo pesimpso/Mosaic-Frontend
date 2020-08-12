@@ -99,11 +99,11 @@ class _SignUpState extends State<SignUp> {
                 color: Colors.lightBlue,
                 clipBehavior: Clip.hardEdge,
                 /* NEED TO ADD FUNCTIONALITY */
-                onPressed: () {
+                onPressed: () async {
                   //Don't act if password hasn't been properly re-entered
                   if (reenteredPW != this.data.password) {
                   } else {
-                    if (Provider.of<AppData>(context, listen: false)
+                    if (await Provider.of<AppData>(context, listen: false)
                         .validateRegistration(this.data)) {
                       Navigator.pushNamed(context, Homepage.id);
                     }

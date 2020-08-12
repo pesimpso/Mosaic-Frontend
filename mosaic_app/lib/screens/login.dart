@@ -81,8 +81,8 @@ class _LoginState extends State<Login> {
                 clipBehavior: Clip.hardEdge,
                 textColor: Colors.white,
                 /* NEED TO ADD FUNCTIONALITY */
-                onPressed: () {
-                  if (Provider.of<AppData>(context, listen: false)
+                onPressed: () async {
+                  if (await Provider.of<AppData>(context, listen: false)
                       .validateLogin(this.data)) {
                     Navigator.pushNamed(context, Homepage.id);
                   }

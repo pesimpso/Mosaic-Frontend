@@ -65,7 +65,7 @@ class RestaurantResultCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       StarDisplay(
-                        rating: restaurant.rating,
+                        associatedRestaurant: restaurant,
                         height: 23,
                       ),
                       HeartIcon(

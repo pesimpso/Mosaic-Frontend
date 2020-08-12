@@ -17,6 +17,7 @@ class UserLocator {
     } else {
       return this.position;
     }
+    return position;
   }
 
   Future<void> getCurrentLocation(

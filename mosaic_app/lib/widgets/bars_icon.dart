@@ -17,7 +17,7 @@ class BarIcon extends CategoryIconAncestor {
             color: Colors.white,
           ),
           Text(
-            'Bars',
+            'Juice',
             style: kSmallLabelStyle,
           ),
         ],
