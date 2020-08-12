@@ -99,6 +99,8 @@ class _SettingsState extends State<Settings> {
                                 ),
                                 onPressed: () {
                                   //provider to update username
+                                  Provider.of<AppData>(context, listen: false)
+                                      .changeUsername(this.data.username);
                                   Navigator.of(context).pop();
                                 },
                               ),
@@ -153,13 +155,10 @@ class _SettingsState extends State<Settings> {
                                 style: kBodyStyle,
                               ),
                               onPressed: () {
-                                // if (reenteredPW != this.data.password) {
-                                // } else {
-                                //   if (Provider.of<AppData>(context,
-                                //           listen: false)
-                                //       .validateRegistration(this.data))
-                                //     Navigator.of(context).pop();
-                                // }
+                                if (reenteredPW != this.data.password) {
+                                } else {
+                                  Navigator.of(context).pop();
+                                }
                               },
                             ),
                             willDisplayWidget: Column(

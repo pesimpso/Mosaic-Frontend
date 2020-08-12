@@ -148,6 +148,14 @@ class AppData extends ChangeNotifier {
     }
   }
 
+  void changeUsername(String u) {
+    if (usernameFavoritesMap.containsKey(this.username)) {
+      List<Restaurant> list = usernameFavoritesMap[username];
+      usernameFavoritesMap.remove(this.username);
+      usernameFavoritesMap.putIfAbsent(u, () => list);
+    }
+  }
+
   //TODO Delete below once networking is implemented
   List<Restaurant> dummyList = [
     Restaurant(
