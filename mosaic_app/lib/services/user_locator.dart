@@ -29,9 +29,6 @@ class UserLocator {
       position = await geolocator.getCurrentPosition(desiredAccuracy: locAcc);
       userLongitude = position.longitude;
       userLatitude = position.latitude;
-
-      debugPrint(userLatitude.toString());
-      debugPrint(userLongitude.toString());
     }
   }
 }

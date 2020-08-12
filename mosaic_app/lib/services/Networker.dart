@@ -5,13 +5,16 @@ import 'dart:convert';
 import 'package:mosaicapp/models/restaurant.dart';
 
 class MosaicNetworker {
-  final String url;
+  static String url =
+      "http://168.235.82.146:8080/Mosaic_Server/MosaicAPIServlet";
 
-  MosaicNetworker({this.url});
+  MosaicNetworker();
 
   Future validateLogin(String username, String pw) async {
-    var response = await http.post(url,
-        body: {'task': 'login', 'username': username, 'password': pw});
+    convertToURLForm(username);
+    convertToURLForm(pw);
+    var response = await http
+        .get(url + '?task=login&username=' + username + '&password=' + pw);
 
     String data = response.body;
     dynamic json = jsonDecode(data);
@@ -19,62 +22,75 @@ class MosaicNetworker {
   }
 
   Future registerUser(String username, String pw) async {
-    var response = await http.post(url,
-        body: {'task': 'register', 'username': username, 'password': pw});
+    convertToURLForm(username);
+    convertToURLForm(pw);
+    http.Response response = await http
+        .get(url + '?task=register&username=' + username + '&password=' + pw);
 
     String data = response.body;
     dynamic json = jsonDecode(data);
     return json['result'];
   }
 
-  dynamic serveQuery(Query query) {
+  Future<List<Restaurant>> serveQuery(Query query) async {
+    List<Restaurant> result = List<Restaurant>();
     //Handle text-based queries
     if (query.queryType == QueryType.Text) {
-      return _serveTextQuery(query.queryText);
+      result = await _serveTextQuery(query.queryText, result);
     }
     //Handle categorical queries
     else if (query.queryType == QueryType.Category) {
-      return _serveCategoryQuery(query.queryCategory);
+      result = await _serveCategoryQuery(query.queryCategory, result);
     }
     //Handle geospatial queries
     else if (query.queryType == QueryType.Geospatial) {
-      _serveGeospatialQuery(query.userPosition);
-    } else {
-      return null;
+      result = await _serveGeospatialQuery(query.userPosition, result);
     }
+    return result;
   }
 
-  Future _serveTextQuery(String queryText) async {
+  Future _serveTextQuery(String queryText, List<Restaurant> result) async {
     if (queryText == null || queryText == "") {
       return List<Restaurant>();
     }
-    var response = await http
-        .get(url, headers: {'task': 'textquery', "querytext": queryText});
+    var response =
+        await http.get(url + '?task=textquery&querytext=' + queryText);
     return responseToList(response);
   }
 
-  Future _serveCategoryQuery(Category category) async {
+  Future _serveCategoryQuery(Category category, List<Restaurant> result) async {
     if (category == null) {
       return List<Restaurant>();
     }
-    String categoryString = category.toString();
-    categoryString = categoryString.split(".")[0];
 
-    var response = await http.get(url,
-        headers: {'task': 'categoryquery', "category": categoryString});
+    int cat = categoryToInt(category);
+
+    http.Response response = await http
+        .get(url + '?task=categoryquery&categoryString=' + cat.toString());
     return responseToList(response);
   }
 
-  Future _serveGeospatialQuery(Position userPosition) async {
+  int categoryToInt(Category category) {
+    //TODO IMPLEMENT ACTUAL CONVERSION HERE
+    return 2;
+  }
+
+  Future _serveGeospatialQuery(
+      Position userPosition, List<Restaurant> result) async {
     if (userPosition == null) {
       return List<Restaurant>();
     }
     String lat = userPosition.latitude.toString();
     String lng = userPosition.longitude.toString();
 
-    var response = await http
-        .get(url, headers: {'task': 'geoquery', 'lat': lat, 'lng': lng});
-    return responseToList(response);
+    var response = await http.post(url,
+        body: json.encode({'task': 'geoquery', 'lat': lat, 'lng': lng}));
+    List<Restaurant> rests = responseToList(response);
+    print('here');
+    for (Restaurant rest in rests) {
+      print(rest.businessName);
+    }
+    return rests;
   }
 
   static dynamic responseToList(var response) {
@@ -87,5 +103,10 @@ class MosaicNetworker {
       }
     }
     return list;
+  }
+
+  String convertToURLForm(String toConv) {
+    toConv.replaceAll(" ", "+");
+    return toConv;
   }
 }

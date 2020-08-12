@@ -6,7 +6,7 @@ class Restaurant {
   String businessPhone;
 
   String imgURL;
-  NetworkImage image;
+  NetworkImage _image;
 
   //Stores the community rating for the restaurant
   double rating;
@@ -26,7 +26,7 @@ class Restaurant {
     this.businessName,
     this.businessAddress,
     this.businessPhone,
-    this.image,
+    this.imgURL,
   });
 
   Restaurant.fromJson(Map<String, dynamic> json) {
@@ -34,7 +34,6 @@ class Restaurant {
     businessAddress = json['location']['address1'];
     businessPhone = json['phone'];
     imgURL = json['image_url'];
-    image = NetworkImage(imgURL);
     thumbsUp = json['thumbsUp'];
     thumbsDown = json['thumbsDown'];
     userRating = thumbsUp / thumbsDown;

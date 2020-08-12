@@ -18,9 +18,7 @@ class AppData extends ChangeNotifier {
   LinkedHashMap<String, List> usernameFavoritesMap =
       LinkedHashMap<String, List>();
 
-  //TODO sub-in real URL
-  static String dummyURL = "";
-  static MosaicNetworker _networker = MosaicNetworker(url: dummyURL);
+  static MosaicNetworker _networker = MosaicNetworker();
   String username = null;
 
   AppData({bool guest}) {
@@ -196,9 +194,9 @@ class AppData extends ChangeNotifier {
     return this._locator.position;
   }
 
-  QueryReturnData query(Query query) {
+  Future<QueryReturnData> query(Query query) async {
     QueryReturnData returnData = QueryReturnData();
-    queryHelp(query, returnData);
+    await queryHelp(query, returnData);
     return returnData;
   }
 

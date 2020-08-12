@@ -76,13 +76,11 @@ class RestaurantResultCard extends StatelessWidget {
                   )
                 ],
               )),
-              Container(
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(5)),
-                    color: Colors.grey),
-                height: 150,
+              Image.network(
+                restaurant.imgURL,
                 width: 150,
-              ),
+                height: 150,
+              )
             ],
           )),
     );

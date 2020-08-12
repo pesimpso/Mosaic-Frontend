@@ -26,8 +26,8 @@ class SearchBar extends StatelessWidget {
             border: const OutlineInputBorder(),
             hintText: 'Search for...',
           ),
-          onSubmitted: (String queryText) {
-            QueryReturnData returnData = Provider.of<AppData>(context,
+          onSubmitted: (String queryText) async {
+            QueryReturnData returnData = await Provider.of<AppData>(context,
                     listen: false)
                 .query(Query(queryType: QueryType.Text, queryText: queryText));
             if (returnData.success) {

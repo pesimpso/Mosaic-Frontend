@@ -23,32 +23,41 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
+  List<Restaurant> l1 = List<Restaurant>();
+  List<Restaurant> l2 = List<Restaurant>();
+
   //Master list to track geospatial query results which will then be divided among the list
-  List<Restaurant> geospatialQueryResult;
+  List<Restaurant> geospatialQueryResult = List<Restaurant>();
+
+  Future fetchGeoQuery() async {
+    QueryReturnData returnData =
+        await Provider.of<AppData>(context, listen: false).query(Query(
+            queryType: QueryType.Geospatial,
+            userPosition: Provider.of<AppData>(context, listen: false)
+                .getUserLocation()));
+    //If the query fails, return an empty list
+    if (returnData.success == false) {
+      geospatialQueryResult = List<Restaurant>();
+    }
+    geospatialQueryResult = returnData.result;
+  }
 
   //Gets the geospatial query results, returns it for list display
-  List<Restaurant> getCarouselList(int whichHalf) {
+  Future<List<Restaurant>> getCarouselList(int whichHalf) async {
+    await fetchGeoQuery();
     //If a carousel is for less than one half of the list, give it nothing.
     if (whichHalf > 2 || whichHalf < 1) {
       return List<Restaurant>();
     }
     //Get geospatial results if we don't already have them
     if (geospatialQueryResult == null) {
-      QueryReturnData returnData = Provider.of<AppData>(context).query(Query(
-          queryType: QueryType.Geospatial,
-          userPosition: Provider.of<AppData>(context).getUserLocation()));
-      //If the query fails, return an empty list
-      if (returnData.success == false) {
-        return List<Restaurant>();
-      }
-
-      geospatialQueryResult = returnData.result;
-    }
-
-    if (geospatialQueryResult == null) {
       return List<Restaurant>();
     }
 
+    print('toPrint');
+    for (Restaurant rest in geospatialQueryResult) {
+      print(rest.businessName);
+    }
     //Once we have the data, divide it up according to whichHalf and send it back
     if (whichHalf == 1) {
       return geospatialQueryResult.sublist(
@@ -59,6 +68,23 @@ class _HomepageState extends State<Homepage> {
     } else {
       return List<Restaurant>();
     }
+  }
+
+  Future getGeoData() async {
+    List<Restaurant> l1_;
+    List<Restaurant> l2_;
+    l1_ = await getCarouselList(1);
+    l2_ = await getCarouselList(2);
+    setState(() {
+      l1 = l1_;
+      l2 = l2_;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getGeoData();
   }
 
   @override
@@ -116,13 +142,13 @@ class _HomepageState extends State<Homepage> {
                   ),
                 ),
                 RestaurantCarouselDisplay(
-                  restaurants: getCarouselList(1),
+                  restaurants: l1,
                 ),
                 SizedBox(
                   height: 20,
                 ),
                 RestaurantCarouselDisplay(
-                  restaurants: getCarouselList(2),
+                  restaurants: l2,
                 ),
               ],
             ),

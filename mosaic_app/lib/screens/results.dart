@@ -23,7 +23,7 @@ class _ResultState extends State<Results> {
     }
   }
 
-  //TODO IF TIME ALLOWS, AUT0-FILL SEARCH BOX W/ PREVIOUS QUERY BY PASSING IT INTO SEARCHBAR
+  //TODO AUT0-FILL SEARCH BOX W/ PREVIOUS QUERY BY PASSING IT INTO SEARCHBAR
   @override
   Widget build(BuildContext context) {
     _restaurants = ModalRoute.of(context).settings.arguments;
